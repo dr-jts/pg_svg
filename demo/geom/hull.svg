@@ -1,0 +1,36 @@
+<svg viewBox="47 -214 139 186" xmlns="http://www.w3.org/2000/svg">
+<path  style="stroke:#0088cc; stroke-width:1; fill:#88ccff; stroke-linejoin:round; " fill-rule="evenodd"   d="M 99 -33 L 55 -62 52 -154 81 -209 173 -180 181 -104 179 -99 158 -60 Z" ><title>Convex Hull</title></path>
+<path  style="stroke:#0000ff; stroke-width:1; stroke-opacity:0.5; fill:#a0a0ff; stroke-linejoin:round; " fill-rule="evenodd"   d="M 99 -33 L 71 -61 55 -62 75 -76 80 -121 52 -154 52 -154 87 -172 81 -209 81 -209 109 -196 135 -187 173 -180 173 -180 173 -180 181 -104 181 -104 179 -99 166 -81 158 -60 126 -48 99 -33 Z" ><title>Concave Hull</title></path>
+<g  style="fill:#ff0000; ">
+<circle  r="2"  cx="158" cy="-60" />
+<circle  r="2"  cx="105" cy="-64" />
+<circle  r="2"  cx="109" cy="-196" />
+<circle  r="2"  cx="87" cy="-172" />
+<circle  r="2"  cx="75" cy="-76" />
+<circle  r="2"  cx="100" cy="-111" />
+<circle  r="2"  cx="99" cy="-33" />
+<circle  r="2"  cx="150" cy="-78" />
+<circle  r="2"  cx="95" cy="-91" />
+<circle  r="2"  cx="81" cy="-209" />
+<circle  r="2"  cx="78" cy="-153" />
+<circle  r="2"  cx="172" cy="-92" />
+<circle  r="2"  cx="109" cy="-159" />
+<circle  r="2"  cx="179" cy="-99" />
+<circle  r="2"  cx="80" cy="-121" />
+<circle  r="2"  cx="80" cy="-128" />
+<circle  r="2"  cx="52" cy="-154" />
+<circle  r="2"  cx="181" cy="-104" />
+<circle  r="2"  cx="166" cy="-81" />
+<circle  r="2"  cx="71" cy="-61" />
+<circle  r="2"  cx="131" cy="-60" />
+<circle  r="2"  cx="101" cy="-82" />
+<circle  r="2"  cx="126" cy="-48" />
+<circle  r="2"  cx="173" cy="-180" />
+<circle  r="2"  cx="109" cy="-171" />
+<circle  r="2"  cx="169" cy="-86" />
+<circle  r="2"  cx="135" cy="-170" />
+<circle  r="2"  cx="55" cy="-62" />
+<circle  r="2"  cx="103" cy="-197" />
+<circle  r="2"  cx="135" cy="-187" />
+</g>
+</svg>

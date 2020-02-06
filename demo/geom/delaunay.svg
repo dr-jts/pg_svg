@@ -1,0 +1,22 @@
+<svg viewBox="45 -165 120 120" xmlns="http://www.w3.org/2000/svg">
+<g  style="stroke:#0000ff; stroke-width:1; fill:#a0a0ff; stroke-linejoin:round; ">
+<path  fill-rule="evenodd"   d="M 50 -120 L 50 -50 70 -80 Z"  />
+<path  fill-rule="evenodd"   d="M 50 -120 L 70 -80 100 -100 Z"  />
+<path  fill-rule="evenodd"   d="M 50 -120 L 100 -100 70 -160 Z"  />
+<path  fill-rule="evenodd"   d="M 70 -160 L 100 -100 130 -150 Z"  />
+<path  fill-rule="evenodd"   d="M 130 -150 L 100 -100 160 -110 Z"  />
+<path  fill-rule="evenodd"   d="M 160 -110 L 100 -100 130 -70 Z"  />
+<path  fill-rule="evenodd"   d="M 50 -50 L 130 -70 70 -80 Z"  />
+<path  fill-rule="evenodd"   d="M 70 -80 L 130 -70 100 -100 Z"  />
+<title>Delaunay Triangulation</title></g>
+<g  style="fill:#ff0000; ">
+<circle  r="2"  cx="50" cy="-50" />
+<circle  r="2"  cx="50" cy="-120" />
+<circle  r="2"  cx="100" cy="-100" />
+<circle  r="2"  cx="130" cy="-70" />
+<circle  r="2"  cx="130" cy="-150" />
+<circle  r="2"  cx="70" cy="-160" />
+<circle  r="2"  cx="160" cy="-110" />
+<circle  r="2"  cx="70" cy="-80" />
+<title>Site</title></g>
+</svg>
