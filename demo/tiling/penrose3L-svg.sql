@@ -1,43 +1,25 @@
 --================================================
--- Penrose P3 Tiling created by inflation, initialized by 5 S triangles
+-- Penrose P3 Tiling created by inflation, initialized by single L triangle
 
--- Initial state is 5 S triangles in a fan in the positive Y halfplane
--- and centred at the origin.
--- The small interior angle of the S triangle is 38 degrees = PI/5
+-- Initial triangle is an L triangle ABC with long edge A-C of length 200
+-- lying along X axis and centred at the origin
+-- L triangle sides are in the ratio 1:1:phi.
+-- Thus the height of the B vertex is 100 * sin( phi/2 )
 
 -- The number of output tiles is determined by the depth of recursion,
 -- which is specified by the LEVEL value.
 --================================================
 
--- psql -A -t -o penrose3-2.svg  < penrose3-2-svg.sql
+-- psql -A -t -o penrose3L.svg  < penrose3L-svg.sql
 
 WITH RECURSIVE
-init(type, ax,ay, bx,by, cx,cy) AS (VALUES
-		( 'S',
-			100::float8, 0::float8,
-			0::float8, 0::float8,
-			100 * cos( pi() / 5 ), 100 * sin( pi() / 5 )
-		),
-		( 'S',
-			100 * cos( 2 * pi() / 5 ), 100 * sin( 2 * pi() / 5 ),
-			0::float8, 0::float8,
-			100 * cos( pi() / 5 ), 100 * sin( pi() / 5 )
-		),
-		( 'S',
-			100 * cos( 2 * pi() / 5 ), 100 * sin( 2 * pi() / 5 ),
-			0::float8, 0::float8,
-			100 * cos( 3 * pi() / 5 ), 100 * sin( 3 * pi() / 5 )
-		),
-		( 'S',
-			100 * cos( 4 * pi() / 5 ), 100 * sin( 4 * pi() / 5 ),
-			0::float8, 0::float8,
-			100 * cos( 3 * pi() / 5 ), 100 * sin( 3 * pi() / 5 )
-		),
-		( 'S',
-			100 * cos( 4 * pi() / 5 ), 100 * sin( 4 * pi() / 5 ),
-			0::float8, 0::float8,
-			-100::float8, 0::float8
-		)
+init(type, ax,ay, bx,by, cx,cy) AS (
+	SELECT * FROM (VALUES
+		( 'L',
+			-100::float8, 0::float8,
+			0::float8   , 100 * sin( (sqrt(5)+1.0)/4.0 ),
+			100::float8, 0::float8
+		) ) AS t (type, ax,ay, bx,by, cx,cy)
 ),
 tri(i, type,  ax,ay, bx,by, cx,cy, psi, psi2) AS (
 	SELECT 0, *,
@@ -94,9 +76,9 @@ tri(i, type,  ax,ay, bx,by, cx,cy, psi, psi2) AS (
 		( 'S', 4, 'S'),
 		( 'S', 5, 'L') ) AS trimap(type, split, subtype)
 		ON tri.type = trimap.type
-	WHERE i <= 4 ),  -- LEVEL
+	WHERE i <= 5 ),  -- LEVEL
 toptri AS (
-	SELECT * FROM tri WHERE i = 4  -- LEVEL
+	SELECT * FROM tri WHERE i = 5  -- LEVEL
 ),
 conjugate AS (
 	SELECT type,ax,ay,bx,by,cx,cy FROM toptri
@@ -113,14 +95,19 @@ tiling AS (
 	SELECT DISTINCT ON (midx, midy) type,ax,ay,bx,by,cx,cy,
 		midx - (bx - midx) AS dx,
 		midy - (by - midy) AS dy,
-		CASE type WHEN 'L' THEN 'steelblue' WHEN 'S' THEN 'lightskyblue' END AS clr
+		CASE type WHEN 'L' THEN 'burlywood' WHEN 'S' THEN 'brown' END AS clr
 	FROM rhombs
 )
-SELECT svgDoc( array_agg(
-		svgPolygon( ARRAY[ ax, ay, bx, by, cx, cy, dx, dy],
-			    style => svgStyle( 'stroke', 'white', 'stroke-width', '1',
-				               'fill', clr )
-		) ),
-  		'-110 -120 220 240'
-  	) AS svg
+SELECT '<svg viewBox="-110 -80 220 160" '
+    || 'style="stroke-width:0.4 ;stroke:#ffffff" xmlns="http://www.w3.org/2000/svg">'
+    || E'\n'
+    || string_agg(
+        '<polygon style="fill:' || clr || ';"  '
+        || ' points="'
+			|| ax || ',' || ay || ' '
+			|| bx || ',' || by || ' '
+			|| cx || ',' || cy || ' '
+			|| dx || ',' || dy
+        || '" />', E'\n' )
+    || E'\n' || '</svg>' || E'\n' AS svg
   FROM tiling;
