@@ -107,20 +107,20 @@ DECLARE
   pathAttrs text;
   radiusAttr text;
   tag text;
-  geom_dump geometry[];
+  geom_elem geometry[];
   isGrp boolean;
-  gcomp geometry;
+  gelem geometry;
   outstr text;
 BEGIN
 
  attrs := _svgAttr( class, id, style, attr);
- geom_dump := ARRAY( SELECT (ST_Dump( geom )).geom );
+ geom_elem := ARRAY( SELECT (ST_Dump( geom )).geom );
 
-IF cardinality( geom_dump ) = 0 THEN
+IF cardinality( geom_elem ) = 0 THEN
   RETURN '';
 END IF;
 
- isGrp := array_length( geom_dump,1 ) > 1;
+ isGrp := array_length( geom_elem,1 ) > 1;
  IF isGrp THEN
    outstr := '<g ' || attrs || '>' || E'\n';
    pathAttrs := '';
@@ -129,20 +129,20 @@ END IF;
    pathAttrs := attrs;
  END IF;
 
- FOR i IN 1..array_length( geom_dump,1 ) LOOP
-   gcomp := geom_dump[i];
-   svg_pts := ST_AsSVG( gcomp );
+ FOR i IN 1..array_length( geom_elem, 1 ) LOOP
+   gelem := geom_elem[i];
+   svg_pts := ST_AsSVG( gelem );
    tag := 'path';
    radiusAttr := '';
    -- points already have attribute names
-   IF ST_Dimension(geom) > 0 THEN
+   IF ST_Dimension( gelem ) > 0 THEN
      svg_pts := ' d="' || svg_pts || '" ';
    ELSE
      tag := 'circle';
      radiusAttr := ' r="' || radius || '" ';
    END IF;
 
-   CASE ST_Dimension(geom)
+   CASE ST_Dimension( gelem )
    WHEN 1 THEN fillrule := ' fill="none" ';
    WHEN 2 THEN fillrule := ' fill-rule="evenodd" ';
    ELSE fillrule := '';
