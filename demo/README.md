@@ -16,3 +16,9 @@ SQL queries to generate fractals
 ## Tiling
 
 SQL queries to generate planar tilings
+
+* Penrose 3 tiling from L tile - `psql -A -t -o penrose3L.svg  < tiling/penrose3L-svg.sql`
+* Penrose 3 tiling from S tiles - `psql -A -t -o penrose3S.svg  < tiling/penrose3S-svg.sql`
+* Truchet tiling (SVG arcs) - `psql -A -t -o truchet-arc.svg  < tiling/truchet-arc-svg.sql`
+* Truchet tiling (WKT curves to polygons) - `psql -A -t -o truchet-curve-poly.svg  < tiling/truchet-curve-poly-svg.sql`
+* Truchet tiling (WKT curves to lines) - `psql -A -t -o truchet-curve-line.svg  < tiling/truchet-curve-line-svg.sql`
