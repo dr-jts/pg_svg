@@ -1,0 +1,33 @@
+<svg viewBox="5 -225 390 220" xmlns="http://www.w3.org/2000/svg">
+
+<circle  style="fill:#0000ff; " r="2"  cx="10" cy="-210"><title>POINT</title></circle>
+<g  style="fill:#0000ff; ">
+<circle  r="2"  cx="110" cy="-210" />
+<circle  r="2"  cx="110" cy="-220" />
+<circle  r="2"  cx="120" cy="-210" />
+<title>MULTIPOINT</title></g>
+
+<path  style="stroke:#0000ff; stroke-width:1; stroke-linejoin:round; " fill="none"   d="M 20 -180 L 80 -180 20 -110 80 -120 40 -160" ><title>LINESTRING</title></path>
+
+<g  style="stroke:#0000ff; stroke-width:1; stroke-linejoin:round; ">
+<path  fill="none"   d="M 110 -190 L 150 -190 110 -140 150 -110"  />
+<path  fill="none"   d="M 180 -180 L 140 -150 180 -120 190 -150"  />
+<title>MULTILINESTRING</title></g>
+
+<path  style="stroke:#0000ff; stroke-width:1; stroke-linejoin:round; fill:#c0c0ff; " fill-rule="evenodd"   d="M 10 -90 L 90 -90 70 -50 90 -10 30 -10 Z" ><title>POLYGON</title></path>
+<path  style="stroke:#0000ff; stroke-width:1; stroke-linejoin:round; fill:#c0c0ff; " fill-rule="evenodd"   d="M 110 -90 L 190 -90 170 -50 190 -10 130 -10 Z M 130 -70 L 160 -80 150 -40 Z" ><title>POLYGON</title></path>
+
+<g  style="stroke:#0000ff; stroke-width:1; stroke-linejoin:round; fill:#c0c0ff; ">
+<path  fill-rule="evenodd"   d="M 210 -90 L 250 -90 230 -50 Z"  />
+<path  fill-rule="evenodd"   d="M 210 -40 L 260 -10 270 -40 Z"  />
+<path  fill-rule="evenodd"   d="M 260 -90 L 290 -90 290 -50 250 -50 270 -70 Z"  />
+<title>MULTIPOLYGON</title></g>
+
+<g  style="stroke:#0000ff; stroke-width:1; stroke-linejoin:round; fill:#c0c0ff; ">
+<path  fill-rule="evenodd"   d="M 310 -170 L 350 -190 340 -140 Z"  />
+<path  fill="none"   d="M 360 -180 L 390 -170 360 -140 390 -110"  />
+<circle  r="2"  cx="310" cy="-130" />
+<circle  r="2"  cx="320" cy="-110" />
+<circle  r="2"  cx="340" cy="-130" />
+<title>GEOMETRYCOLLECTION</title></g>
+</svg>
