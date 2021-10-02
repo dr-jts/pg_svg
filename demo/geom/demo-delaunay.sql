@@ -19,7 +19,7 @@ shapes AS (
         'stroke-linejoin', 'round' ) )
     svg FROM result
   UNION ALL
-  SELECT geom, svgShape( geom, radius=>2,
+  SELECT geom, svgShape( geom, radius => 2,
     title => 'Site',
     style => svgStyle( 'fill', '#ff0000'  ) )
     svg FROM input

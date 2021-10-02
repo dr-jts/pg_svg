@@ -30,7 +30,7 @@ shapes AS (
         'stroke-linejoin', 'round' ) )
     svg FROM concave
   UNION ALL
-  SELECT geom, svgShape( geom, radius=>2,
+  SELECT geom, svgShape( geom, radius => 2,
     style => svgStyle( 'fill', '#ff0000'  ) )
     svg FROM input
 )
