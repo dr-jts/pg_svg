@@ -116,6 +116,10 @@ BEGIN
  attrs := _svgAttr( class, id, style, attr);
  geom_dump := ARRAY( SELECT (ST_Dump( geom )).geom );
 
+IF cardinality( geom_dump ) = 0 THEN
+  RETURN '';
+END IF;
+
  isGrp := array_length( geom_dump,1 ) > 1;
  IF isGrp THEN
    outstr := '<g ' || attrs || '>' || E'\n';
