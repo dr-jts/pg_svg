@@ -117,9 +117,9 @@ tiling AS (
 	FROM rhombs
 )
 SELECT svgDoc( array_agg(
-		svgPolygon(	ARRAY[ ax, ay, bx, by, cx, cy, dx, dy],
-			style => svgStyle( 'stroke', 'white', 'stroke-width', '1',
-				'fill', clr )
+		svgPolygon( ARRAY[ ax, ay, bx, by, cx, cy, dx, dy],
+			    style => svgStyle( 'stroke', 'white', 'stroke-width', '1',
+				               'fill', clr )
 		) ),
   		'-110 -120 220 240'
   	) AS svg
