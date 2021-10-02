@@ -3,7 +3,7 @@
 -- Martin Davis  2019
 --======================================
 
--- psql < svg-lib.sql
+-- psql < pg-svg-lib.sql
 
 ----------------------------------------
 -- Function: svgDoc
