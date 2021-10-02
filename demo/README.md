@@ -6,8 +6,13 @@ SQL queries to create visualizations of geometric constructions
 
 ## Fractal
 
-SQL queries to generate various kinds of fractals
+SQL queries to generate fractals
+
+* Dragon Curve - `psql -A -t -o dragon-curve.wkt  < fractal/dragon-curve.sql`
+* Hilbert Curve - `psql -A -t -o hilbert-curve.svg  < fractal/hilbert-curve-svg.sql`
+* Mandelbrot Set - `psql -A -t -o mandelbrot-rle.svg  < fractal/mandelbrot-rle-svg.sql`
+* Sierpinski Carpet - `psql -A -t -o sierpinski-carpet.svg  < fractal/sierpinski-carpet.sql`
 
 ## Tiling
 
-SQL queries to generate various kinds of planar tilings
+SQL queries to generate planar tilings
