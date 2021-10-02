@@ -8,7 +8,7 @@ for simple geometry generation without PostGIS.
 ## Installation
 
 ```
-psql < svg-lib.sql
+psql < pg-svg-lib.sql
 ```
 
 ## Functions
