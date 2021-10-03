@@ -1,9 +1,9 @@
 # SVG Functions
 
-A collection of PostgreSQL functions which allow easily creating SVG graphics.
-The main goal of the API is to allow converting PostGIS geometries into styled SVG documents.
-But the functions are written to be modular enough to allow using them
-for simple geometry generation without PostGIS.
+A collection of [PostgreSQL](https://www.postgresql.org/) functions 
+which allow easily creating [SVG](https://developer.mozilla.org/en-US/docs/Web/SVG) graphics.
+The main goal of the API is to allow converting [PostGIS](https://postgis.net/) geometries into styled SVG documents.
+The functions also support simple geometry generated without PostGIS.
 
 ## Installation
 
