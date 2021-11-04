@@ -56,10 +56,16 @@ Encodes a PostGIS geometry as an SVG shape.
 *  `attr` - (opt) additional attributes
 *  `title` - (opt) title
 
-
 ### svgPolygon
 
-Encodes an array of ordinates as an SVG polygon.
+Encodes an array of XY ordinates as an SVG `polygon`.
+
+*  `pts` - array of X Y ordinates
+*  `class` - (opt) class attribute
+*  `id` - (opt) id attribute
+*  `style` - (opt) style attribute value
+*  `attr` - (opt) additional attributes
+*  `title` - (opt) title
 
 ### svgStyle
 
@@ -67,8 +73,8 @@ Encodes an array of name,value pairs as a string of SVG CSS `name: value;` prope
 
 * `param ...` - list of name/value pairs
 
-Common styling CSS properties are given below,
-or see full list [here](https://www.w3.org/TR/SVG/propidx.html).
+Common styling CSS properties are given below.
+For full list see [W3C SVG spec](https://www.w3.org/TR/SVG/propidx.html).
 
 * `fill` - fill color
 * `fill-opacity` - opacity of fill; value in [ 0,1 ]
@@ -78,19 +84,20 @@ or see full list [here](https://www.w3.org/TR/SVG/propidx.html).
 * `stroke-width` - line width
 * `fill-opacity` - opacity of stroke; value in [ 0,1 ]
 
-CSS colour specifiers include:
+CSS color specifiers include:
 
-* `#RGGBB`,
+* `#RRGGBB`
 * `colorname`
-* `hsl(h,sl)` - can use the `svgHSL` function for this
+* `hsl(h,s,l)` - can use the `svgHSL` function to create this
+* `url(#id)` - reference to a gradient definition
 
 ### svgHSL
 
-Encodes H,S,L values a CSS HSL function
+Encodes H,S,L values as a CSS HSL function `hsl(H,S,L)`
 
 ### svgRandInt
 
-Returns a random integer from a range [lo, hi] (inclusive)
+Returns a random integer from the range [lo, hi] (inclusive)
 
 ### svgRandPick
 
