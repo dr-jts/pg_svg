@@ -1,6 +1,6 @@
 # SVG Functions
 
-A collection of [PostgreSQL](https://www.postgresql.org/) functions 
+A collection of [PostgreSQL](https://www.postgresql.org/) functions
 which allow easily creating [SVG](https://developer.mozilla.org/en-US/docs/Web/SVG) graphics.
 The main goal of the API is to allow converting [PostGIS](https://postgis.net/) geometries into styled SVG documents.
 The functions also support simple geometry generated without PostGIS.
@@ -21,7 +21,10 @@ Creates an SVG doc element from an array of content elements.
 * `viewbox` - (opt) value of SVG viewBox attribute ( x y width height )
 * `width` (opt) - width of view
 * `height` (opt) - height of view
-* `style` (opt) - specifies CSS styling at the document level (see `svgStyle` function)
+* `style` (opt) - specifies CSS styling at the document level
+  * see `svgStyle` function
+* `def` (opt) - specifies a definition
+  * see `svgLinearGradient` function
 
 ### svgViewbox
 

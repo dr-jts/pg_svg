@@ -11,6 +11,7 @@
 CREATE OR REPLACE FUNCTION svgDoc(
   content text[],
   viewbox text DEFAULT '0 0 100 100',
+  def text DEFAULT '',
   width integer DEFAULT -1,
   height integer DEFAULT -1,
   style text DEFAULT ''
@@ -46,6 +47,12 @@ BEGIN
   svg := '<svg ' || widthAttr || heightAttr
     || viewBoxAttr
     || styleAttr || 'xmlns="http://www.w3.org/2000/svg">' || E'\n';
+
+  IF def <> '' THEN
+    svg := svg || '<defs>' || E'\n';
+    svg := svg || def || E'\n';
+    svg := svg || '</defs>' || E'\n';
+  END IF;
 
   FOR i IN 1..array_length( content, 1) LOOP
     svg := svg || content[i] || E'\n';
@@ -310,6 +317,24 @@ END;
 $$
 LANGUAGE 'plpgsql' IMMUTABLE STRICT;
 
+----------------------------------------
+-- Function: svgLinearGradient
+----------------------------------------
+CREATE OR REPLACE FUNCTION svgLinearGradient(
+  id text,
+  color1 text,
+  color2 text
+)
+RETURNS text AS
+$$
+BEGIN
+  RETURN '<linearGradient id="' || id || '" x1="0%" y1="0%" x2="100%" y2="0%">'
+    || '<stop offset="0%" style="stop-color:' || color1 || ';stop-opacity:1" />'
+    || '<stop offset="100%" style="stop-color:' || color2 || ';stop-opacity:1" />'
+    || '</linearGradient>';
+END;
+$$
+LANGUAGE 'plpgsql' IMMUTABLE STRICT;
 
 ----------------------------------------
 -- Function: svgHSL
