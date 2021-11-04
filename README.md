@@ -34,6 +34,17 @@ envelope of the geometries being encoded.
 
 * `extent` - (opt) a `geometry` providing the envelope to encode.
 
+### svgLinearGradient
+
+Returns an SVG `linearGradient` element.
+The element can be provided as a `def` to `svgDoc`.
+The gradient can be used as a `fill`
+value using the specifier `url(#id)`
+
+* `id` - the gradient id
+* `color1` - the start color of the gradient
+* `color2` - the end color of the gradient
+
 ### svgShape
 
 Encodes a PostGIS geometry as an SVG shape.
