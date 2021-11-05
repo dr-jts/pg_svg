@@ -15,19 +15,16 @@ concave AS (
 shapes AS (
   SELECT geom, svgShape( geom,
     title => 'Convex Hull',
-    style => svgStyle('stroke', '#0088cc',
-        'stroke-width', 1::text,
-        'fill', '#88ccff',
-        'stroke-linejoin', 'round' ) )
+    style => svgStyle('stroke', '#0088cc', 'stroke-width', 1::text,
+        'stroke-linejoin', 'round',
+        'fill', '#88ccff' ) )
     svg FROM convex
   UNION ALL
   SELECT geom, svgShape( geom,
     title => 'Concave Hull',
-    style => svgStyle('stroke', '#0000ff',
-        'stroke-width', 1::text,
-        'stroke-opacity', 0.5::text,
-        'fill', '#a0a0ff',
-        'stroke-linejoin', 'round' ) )
+    style => svgStyle('stroke', '#0000ff', 'stroke-width', 1::text,
+        'stroke-opacity', 0.5::text, 'stroke-linejoin', 'round',
+        'fill', '#a0a0ff' ) )
     svg FROM concave
   UNION ALL
   SELECT geom, svgShape( geom, radius => 2,
@@ -35,5 +32,5 @@ shapes AS (
     svg FROM input
 )
 SELECT svgDoc( array_agg( svg ),
-    viewbox => svgViewbox( ST_Expand( ST_Extent(geom), 5 ))
+    viewbox => svgViewbox( ST_Expand( ST_Extent(geom), 20 ))
   ) AS svg FROM shapes;

@@ -1,5 +1,5 @@
-<svg viewBox="45 -165 120 120" xmlns="http://www.w3.org/2000/svg">
-<g  style="stroke:#0000ff; stroke-width:1; fill:#a0a0ff; stroke-linejoin:round; ">
+<svg viewBox="30 -180 150 150" xmlns="http://www.w3.org/2000/svg">
+<g  style="fill:#a0a0ff; stroke:#0000ff; stroke-width:1; stroke-linejoin:round; ">
 <path  fill-rule="evenodd"   d="M 50 -120 L 50 -50 70 -80 Z"  />
 <path  fill-rule="evenodd"   d="M 50 -120 L 70 -80 100 -100 Z"  />
 <path  fill-rule="evenodd"   d="M 50 -120 L 100 -100 70 -160 Z"  />
