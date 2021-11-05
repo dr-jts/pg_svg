@@ -49,23 +49,43 @@ value using the specifier `url(#id)`
 
 Encodes a PostGIS geometry as an SVG shape.
 
-*  `geom` - geometry to encode
-*  `class` - (opt) class attribute
-*  `id` - (opt) id attribute
-*  `style` - (opt) style attribute value
-*  `attr` - (opt) additional attributes
-*  `title` - (opt) title
+* `geom` - geometry to encode
+* `class` - (opt) class attribute
+* `id` - (opt) id attribute
+* `style` - (opt) style attribute value
+* `attr` - (opt) additional attributes
+* `title` - (opt) title
+
+Relevant style CSS properties include:
+
+* `text-anchor` - value of `start | middle | end | inherit`
+* `font` - full font specifier.  E.g. `10px Verdana,Helvetica,Arial,sans-serif`
+* `font-style` - value of `normal | italic | oblique`
+* `font-weight` - value of `normal | bold | bolder | lighter | <number>`
+
 
 ### svgPolygon
 
 Encodes an array of XY ordinates as an SVG `polygon`.
 
-*  `pts` - array of X Y ordinates
-*  `class` - (opt) class attribute
-*  `id` - (opt) id attribute
-*  `style` - (opt) style attribute value
-*  `attr` - (opt) additional attributes
-*  `title` - (opt) title
+* `pts` - array of X Y ordinates
+* `class` - (opt) class attribute
+* `id` - (opt) id attribute
+* `style` - (opt) style attribute value
+* `attr` - (opt) additional attributes
+* `title` - (opt) title
+
+### svgText
+
+Encodes an array of XY ordinates as an SVG `polygon`.
+
+* `loc` - Point geometry giving location of text
+* `content` - text value
+* `class` - (opt) class attribute
+* `id` - (opt) id attribute
+* `style` - (opt) style attribute value
+* `attr` - (opt) additional attributes
+* `title` - (opt) title
 
 ### svgStyle
 
