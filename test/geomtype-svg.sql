@@ -2,7 +2,7 @@
 -- Demo of using SVG functions to display PostGIS geometry types
 -- Author: Martin Davis  2021
 
--- psql -A -t -o geomtype.svg  < svg-geomtype.sql
+-- psql -A -t -o geomtype.svg  < geomtype-svg.sql
 ------------------------------------------------------------------
 
 WITH data(geom) AS (VALUES

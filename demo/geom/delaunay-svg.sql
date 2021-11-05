@@ -2,7 +2,7 @@
 -- Demo of using SVG functions to display PostGIS Delaunay Triangulation
 -- Author: Martin Davis  2019
 
--- psql -At -o delaunay.svg  < svg-delaunay.sql
+-- psql -At -o delaunay.svg  < delaunay-svg.sql
 ------------------------------------------------------------------
 
 WITH data AS (
