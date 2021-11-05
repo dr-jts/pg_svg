@@ -224,6 +224,36 @@ $$
 LANGUAGE 'plpgsql' IMMUTABLE STRICT;
 
 ----------------------------------------
+-- Function: svgText
+----------------------------------------
+CREATE OR REPLACE FUNCTION svgText(
+  loc geometry,
+--TODO: add dx, dy offsets
+  content text,
+  class text DEFAULT '',
+  id text DEFAULT '',
+  style text DEFAULT '',
+  attr text DEFAULT '',
+  title text DEFAULT ''
+)
+RETURNS text AS
+$$
+DECLARE
+  x float8;
+  y float8;
+BEGIN
+-- TODO: generalize for all geom types (centroid?)
+  x := ST_XMin(loc);
+  y := -ST_YMin(loc);
+  RETURN '<text'
+    || ' x="' || x || '" y="' || y || '" '
+    || _svgAttr( class, id, style, attr)
+    || '>' || content || '</text>';
+END;
+$$
+LANGUAGE 'plpgsql' IMMUTABLE STRICT;
+
+----------------------------------------
 -- Function: _svgAttr
 ----------------------------------------
 CREATE OR REPLACE FUNCTION _svgAttr(
