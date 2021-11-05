@@ -2,7 +2,7 @@
 -- Demo of using SVG functions to display Convex and Concave Hulls
 -- Author: Martin Davis  2019
 
--- psql -At -o hull.svg  < hull-svg.sql
+-- psql -At -o hulls.svg  < hulls-svg.sql
 ------------------------------------------------------------------
 
 WITH input AS (

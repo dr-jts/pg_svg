@@ -1,6 +1,9 @@
-<svg viewBox="47 -214 139 186" xmlns="http://www.w3.org/2000/svg">
-<path  style="stroke:#0088cc; stroke-width:1; fill:#88ccff; stroke-linejoin:round; " fill-rule="evenodd"   d="M 99 -33 L 55 -62 52 -154 81 -209 173 -180 181 -104 179 -99 158 -60 Z" ><title>Convex Hull</title></path>
-<path  style="stroke:#0000ff; stroke-width:1; stroke-opacity:0.5; fill:#a0a0ff; stroke-linejoin:round; " fill-rule="evenodd"   d="M 99 -33 L 71 -61 55 -62 75 -76 80 -121 52 -154 52 -154 87 -172 81 -209 81 -209 109 -196 135 -187 173 -180 173 -180 173 -180 181 -104 181 -104 179 -99 166 -81 158 -60 126 -48 99 -33 Z" ><title>Concave Hull</title></path>
+<svg viewBox="32 -229 169 216" xmlns="http://www.w3.org/2000/svg">
+<path  style="stroke:#0088cc; stroke-width:1; stroke-linejoin:round; fill:#88ccff; " fill-rule="evenodd"   d="M 99 -33 L 55 -62 52 -154 81 -209 173 -180 181 -104 179 -99 158 -60 Z" ><title>Convex Hull</title></path>
+<g  style="stroke:#0000ff; stroke-width:1; stroke-opacity:0.5; stroke-linejoin:round; fill:#a0a0ff; ">
+<circle  r="1"  cx="109" cy="-196" />
+<path  fill-rule="evenodd"   d="M 99 -33 L 71 -61 55 -62 75 -76 80 -121 52 -154 52 -154 52 -154 81 -209 81 -209 103 -197 135 -187 135 -187 173 -180 173 -180 181 -104 181 -104 179 -99 166 -81 158 -60 131 -60 126 -48 Z"  />
+<title>Concave Hull</title></g>
 <g  style="fill:#ff0000; ">
 <circle  r="2"  cx="158" cy="-60" />
 <circle  r="2"  cx="105" cy="-64" />
