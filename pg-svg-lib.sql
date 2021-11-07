@@ -234,8 +234,7 @@ CREATE OR REPLACE FUNCTION svgText(
   class text DEFAULT '',
   id text DEFAULT '',
   style text DEFAULT '',
-  attr text DEFAULT '',
-  title text DEFAULT ''
+  attr text DEFAULT ''
 )
 RETURNS text AS
 $$
