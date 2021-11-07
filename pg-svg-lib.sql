@@ -201,10 +201,6 @@ $$
 DECLARE
   svg_poly text;
   svg_pts text;
-  classAttr text;
-  idAttr text;
-  styleAttr text;
-  attrs text;
   sep text;
 BEGIN
 
@@ -217,6 +213,11 @@ BEGIN
   svg_poly := '<polygon '
     || _svgAttr( class, id, style, attr)
     || ' points="' || svg_pts || '" />';
+
+  IF title <> '' THEN
+    svg_poly := '<g>' || svg_poly;
+    svg_poly := svg_poly || '<title>' || title || '</title></g>';
+  END IF;
 
   RETURN svg_poly;
 END;

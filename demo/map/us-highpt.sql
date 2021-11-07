@@ -6,11 +6,11 @@
 
 -- Requires:
 --    Table ne.us_state - US states geometry in WGS84
-------------------------------------------------------------------
--- psql -A -t -o us-highpt.svg  < us-highpt.sql
 
-WITH
-lower48 AS (SELECT name, abbrev, postal, geom FROM ne.us_state
+-- psql -A -t -o us-highpt.svg  < us-highpt.sql
+------------------------------------------------------------------
+
+WITH lower48 AS (SELECT name, abbrev, postal, geom FROM ne.us_state
                 WHERE ST_YMax(geom) < 50
                   AND ST_YMin(geom) > 23 )
 ,high_pt(name, state, hgt_m, hgt_ft, lon, lat) AS (VALUES
@@ -66,15 +66,16 @@ lower48 AS (SELECT name, abbrev, postal, geom FROM ne.us_state
 ,('Fort Reno',           'DC',  125,   410,  -77.07686,38.95267)
 ,('Britton Hill',        'FL',  105,   345,  -86.281944,30.988333)
 )
-,highpt_geom AS (SELECT name, state, hgt_ft, ST_Point(lon, lat) AS geom,
+,highpt_geom AS (SELECT name, state, hgt_ft, lon, lat,
+    (2.0 * hgt_ft) / 15000.0 + 0.5 AS symHeight,
     CASE WHEN hgt_ft > 14000 THEN '#ffffff'
-         WHEN hgt_ft > 7000 THEN '#aaaaaa'
-         WHEN hgt_ft > 5000  THEN '#ff8800'
-         WHEN hgt_ft > 2000  THEN '#ffff44'
-         WHEN hgt_ft > 1000  THEN '#aaffaa'
+         WHEN hgt_ft >  7000 THEN '#aaaaaa'
+         WHEN hgt_ft >  5000 THEN '#ff8800'
+         WHEN hgt_ft >  2000 THEN '#ffff44'
+         WHEN hgt_ft >  1000 THEN '#aaffaa'
                              ELSE '#558800'
     END AS clr
-    FROM high_pt)
+    FROM high_pt ORDER BY lat DESC)
 ,shapes AS (
   SELECT geom, svgShape( geom,
     title => name,
@@ -84,11 +85,11 @@ lower48 AS (SELECT name, abbrev, postal, geom FROM ne.us_state
                         'stroke-linejoin', 'round' ) )
     svg FROM lower48
   UNION ALL
-  SELECT geom, svgText( ST_Centroid( geom ), abbrev,
+  SELECT NULL, svgText( ST_PointOnSurface( geom ), abbrev,
     style => svgStyle(  'fill', '#6666ff', 'text-anchor', 'middle', 'font', '0.8px sans-serif' ) )
     svg FROM lower48
   UNION ALL
-  SELECT geom, svgShape( geom, radius => .4,
+  SELECT NULL, svgPolygon( ARRAY[ lon-0.5, -lat, lon+0.5, -lat, lon, -lat-symHeight ],
     title => name || ' ' || state || ' - ' || hgt_ft || ' ft',
     style => svgStyle(  'stroke', '#000000',
                         'stroke-width', 0.1::text,
