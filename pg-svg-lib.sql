@@ -302,8 +302,6 @@ CREATE OR REPLACE FUNCTION svgStyle(
 RETURNS TEXT AS
 $$
 DECLARE
-  strokeStr text;
-  strokeWidthStr text;
   style text;
 BEGIN
   style := '';
@@ -321,27 +319,26 @@ LANGUAGE 'plpgsql' IMMUTABLE STRICT;
 ----------------------------------------
 CREATE OR REPLACE FUNCTION svgStyleProp(
   stroke text DEFAULT '',
-  stroke_width real DEFAULT -1
+  stroke_width real DEFAULT -1,
+  css text[] DEFAULT ARRAY[]::text[]
 )
 RETURNS text AS
 $$
 DECLARE
-  strokeStr text;
-  strokeWidthStr text;
   style text;
 BEGIN
 
-  strokeStr := '';
+  style := '';
   IF stroke <> '' THEN
-    strokeStr :=  (' stroke:' || stroke || ';');
+    style := ' stroke:' || stroke || ';';
   END IF;
-
-  strokeWidthStr := '';
   IF stroke_width >= 0 THEN
-    strokeWidthStr :=  (' stroke-width:' || stroke_width || ';');
+    style :=  style || ' stroke-width:' || stroke_width || ';';
   END IF;
+  FOR i IN 1..array_length( css, 1)/2 LOOP
+    style := style || ' ' || css[2*i-1] || ':' || css[2*i] || ';';
+  END LOOP;
 
-  style := strokeStr || strokeWidthStr;
   RETURN style;
 END;
 $$
