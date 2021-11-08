@@ -187,6 +187,8 @@ LANGUAGE 'plpgsql' IMMUTABLE STRICT;
 
 ----------------------------------------
 -- Function: svgPolygon
+-- Parameters:
+-- pts : array of X Y numbers.  Closing point is not needed
 ----------------------------------------
 CREATE OR REPLACE FUNCTION svgPolygon(
   pts float8[],
