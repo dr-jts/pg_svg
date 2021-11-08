@@ -94,23 +94,20 @@ tri(i, type,  ax,ay, bx,by, cx,cy, psi, psi2) AS (
 		( 'S', 4, 'S'),
 		( 'S', 5, 'L') ) AS trimap(type, split, subtype)
 		ON tri.type = trimap.type
-	WHERE i <= 4 ),  -- LEVEL
-toptri AS (
-	SELECT * FROM tri WHERE i = 4  -- LEVEL
+	WHERE i <= 4 ),  				-- LEVEL
+toptri AS (	SELECT * FROM tri
+				WHERE i = 4  		-- LEVEL
 ),
-conjugate AS (
-	SELECT type,ax,ay,bx,by,cx,cy FROM toptri
+conjugate AS (SELECT type,ax,ay,bx,by,cx,cy FROM toptri
 	UNION ALL
 	SELECT type,ax,-ay,bx,-by,cx,-cy FROM toptri
 ),
-rhombs AS (
-	SELECT type,ax,ay,bx,by,cx,cy,
+rhombs AS (SELECT type,ax,ay,bx,by,cx,cy,
 		ax + (cx-ax)/2 AS midx,
 		ay + (cy-ay)/2 AS midy
 	FROM conjugate
 ),
-tiling AS (
-	SELECT DISTINCT ON (midx, midy) type,ax,ay,bx,by,cx,cy,
+tiles AS (SELECT DISTINCT ON (midx, midy) type,ax,ay,bx,by,cx,cy,
 		midx - (bx - midx) AS dx,
 		midy - (by - midy) AS dy,
 		CASE type WHEN 'L' THEN 'steelblue' WHEN 'S' THEN 'lightskyblue' END AS clr
@@ -121,6 +118,6 @@ SELECT svgDoc( array_agg(
 			    style => svgStyle( 'stroke', 'white', 'stroke-width', '1',
 				               'fill', clr )
 		) ),
-  		'-110 -120 220 240'
+  		viewbox => '-110 -120 220 240'
   	) AS svg
-  FROM tiling;
+  FROM tiles;
