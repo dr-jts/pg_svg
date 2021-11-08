@@ -79,7 +79,7 @@ WITH lower48 AS (SELECT name, abbrev, postal, geom FROM ne.us_state
 ,shapes AS (
   SELECT geom, svgShape( geom,
     title => name,
-    style => svgStyle(  'stroke', '#0000ff',
+    style => svgStyle(  'stroke', '#ffffff',
                         'stroke-width', 0.1::text,
                         'fill', 'url(#state)',
                         'stroke-linejoin', 'round' ) )
