@@ -5,34 +5,37 @@
 -- psql -At -o hulls.svg  < hulls-svg.sql
 ------------------------------------------------------------------
 
-WITH input AS (
-  SELECT 'MULTIPOINT ((178 80), (174 133), (42 129), (66 151), (162 163), (127 138), (205 139), (160 88), (147 143), (29 157), (85 160), (146 66), (79 129), (139 59), (117 158), (110 158), (84 186), (134 57), (157 72), (177 167), (178 107), (156 137), (190 112), (58 65), (67 129), (152 69), (68 103), (176 183), (41 135), (51 103))'::geometry geom
+WITH data AS (
+  SELECT 'MULTIPOINT ((178 80), (174 133), (66 151), (162 163), (205 139), (147 143), (29 157), (85 160), (79 129), (117 158), (110 158), (84 186), (134 57), (177 167), (178 107), (190 112), (58 65), (67 129), (68 103), (176 183), (51 103), (90 80), (48 136), (148 76))'::geometry geom
 ),
-convex AS (
-  SELECT ST_ConvexHull( geom ) AS geom FROM input
-),
-concave AS (
-  SELECT ST_ConcaveHull( geom, 0.99 ) AS geom FROM input
-),
+mic AS ( SELECT (mic).center, (mic).radius FROM
+          (SELECT ST_MaximumInscribedCircle( geom ) AS mic FROM data) AS t ),
 shapes AS (
-  SELECT geom, svgShape( geom,
+  SELECT svgShape( ST_ConvexHull( geom ),
     title => 'Convex Hull',
     style => svgStyle('stroke', '#0088cc', 'stroke-width', 1::text,
         'stroke-linejoin', 'round',
         'fill', '#88ccff' ) )
-    svg FROM convex
+    svg FROM data
   UNION ALL
-  SELECT geom, svgShape( geom,
+  SELECT svgShape( ST_ConcaveHull( geom, 0.99 ),
     title => 'Concave Hull',
     style => svgStyle('stroke', '#0000ff', 'stroke-width', 1::text,
         'stroke-opacity', 0.5::text, 'stroke-linejoin', 'round',
         'fill', '#a0a0ff' ) )
-    svg FROM concave
+    svg FROM data
   UNION ALL
-  SELECT geom, svgShape( geom, radius => 2,
+  SELECT svgShape( ST_Buffer( center, radius ),
+    title => 'Maximum Inscribed Circle',
+    style => svgStyle('stroke', '#6600aa', 'stroke-width', 1::text,
+        'stroke-opacity', 0.5::text, 'stroke-linejoin', 'round',
+        'fill', '#dd90ff' ) )
+    svg FROM mic
+  UNION ALL
+  SELECT svgShape( geom, radius => 2,
     style => svgStyle( 'fill', '#ff0000'  ) )
-    svg FROM input
+    svg FROM data
 )
 SELECT svgDoc( array_agg( svg ),
-    viewbox => svgViewbox( ST_Expand( ST_Extent(geom), 20 ))
+    viewbox => svgViewbox( ST_Expand( (SELECT ST_Extent(geom) from data), 20 ))
   ) AS svg FROM shapes;
