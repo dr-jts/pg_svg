@@ -28,7 +28,7 @@ DECLARE
   xSize real;
   ySize real;
 BEGIN
-  viewBoxAttr := 'viewBox="' || viewbox || '" ';
+  viewBoxAttr := ' viewBox="' || viewbox || '" ';
 
   styleAttr := '';
   IF style <> '' THEN
@@ -45,9 +45,9 @@ BEGIN
     heightAttr := ' height="' || height || '" ';
   END IF;
 
-  svg := '<svg ' || widthAttr || heightAttr
-    || viewBoxAttr
-    || styleAttr || 'xmlns="http://www.w3.org/2000/svg">' || E'\n';
+  svg := '<svg xmlns="http://www.w3.org/2000/svg"'
+    || widthAttr || heightAttr
+    || viewBoxAttr || styleAttr  || E'> \n';
 
   IF def <> '' THEN
     svg := svg || '<defs>' || E'\n';
