@@ -424,6 +424,27 @@ $$
 LANGUAGE 'plpgsql' IMMUTABLE STRICT;
 
 ----------------------------------------
+-- Function: svgRGB
+-- Encodes RGB function call
+-- Parameters:
+-- r : red value in 0..255
+-- g : green value in 0..255
+-- b : blue value in 0..255
+----------------------------------------
+CREATE OR REPLACE FUNCTION svgRGB(
+  red integer,
+  green integer,
+  blue integer
+)
+RETURNS text AS
+$$
+BEGIN
+  RETURN 'rgb(' || red || ',' || green || ',' || blue || ')';
+END;
+$$
+LANGUAGE 'plpgsql' IMMUTABLE STRICT;
+
+----------------------------------------
 -- Function: svgRandInt
 -- Returns a random integer in a range
 -- Parameters:

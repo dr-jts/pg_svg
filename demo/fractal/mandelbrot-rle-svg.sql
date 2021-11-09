@@ -55,7 +55,7 @@ plot(iy, ix, ixend, i, b, g) AS (
     FROM rungroup ORDER BY iy, ix
 ),
 svg AS ( SELECT svgRect( ix, iy, ixend-ix+1, 1,
-        style => svgStyle('fill', 'rgb(' || g || ',' || g || ',' || b || ')')
+        style => svgStyle('fill', svgRGB(g, g, b) )
       ) AS svg
     FROM plot
 )
