@@ -427,9 +427,9 @@ LANGUAGE 'plpgsql' IMMUTABLE STRICT;
 -- Function: svgRGB
 -- Encodes RGB function call
 -- Parameters:
--- r : red value in 0..255
--- g : green value in 0..255
--- b : blue value in 0..255
+-- red :   red value in 0..255
+-- green : green value in 0..255
+-- blue :  blue value in 0..255
 ----------------------------------------
 CREATE OR REPLACE FUNCTION svgRGB(
   red integer,
