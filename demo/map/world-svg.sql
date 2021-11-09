@@ -12,15 +12,14 @@
 ------------------------------------------------------------------
 
 WITH world AS ( SELECT name, abbrev, continent,
-        ST_Transform( ST_SnapToGrid(geom, .1), 54030) AS geom,
+        ST_Transform( ST_SnapToGrid(geom, 0.1), 54030) AS geom,
         CASE continent  WHEN 'Africa'         THEN 30
                         WHEN 'Asia'           THEN 300
                         WHEN 'Europe'         THEN 190
                         WHEN 'Oceania'        THEN 60
                         WHEN 'North America'  THEN 160
                         WHEN 'South America'  THEN 0
-                        ELSE -1 END AS hue,
-        floor(random() * 25) AS dH, floor(random() * 30) AS dS
+                        ELSE -1 END AS hue
     FROM ne.admin_0_countries
   ),
 grid AS (
@@ -38,7 +37,8 @@ shapes AS (
   UNION ALL SELECT geom, svgShape( geom, title => name,
       style => svgStyle('stroke', '#444444', 'stroke-width', '10000',
                         'fill', CASE hue WHEN -1 THEN '#ffffff'
-                                                 ELSE svgHSL(hue + dH, 60 + dS, 80) END))
+                                          ELSE svgHSL( svgRandInt(hue, hue + 25),
+                                                       svgRandInt(60, 70), 80) END))
     svg FROM world
   )
 SELECT svgDoc( array_agg( svg ),
