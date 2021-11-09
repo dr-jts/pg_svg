@@ -3,7 +3,7 @@
 -- Parameter: iter - # of iterations
 -- ---------------------------------
 
--- psql -A -t -o dragon-curve.wkt  < dragon-curve.sql
+-- psql -A -t -o dragon-curve.svg  < dragon-curve.sql
 
 WITH RECURSIVE
 lsystem( iter, state ) AS (
@@ -28,7 +28,16 @@ pts( moves, index, dir, x, y, dx, dy, len ) AS (
       CASE substr(moves, index, 1) WHEN 'F' THEN 1 ELSE 0 END AS len
     FROM pts WHERE index <= length(moves)
 ),
-dragon( line )  AS (
-  SELECT ST_RemoveRepeatedPoints( ST_MakeLine( ST_MakePoint( x, y ) ORDER BY index ) ) AS line FROM pts
+dragon(geom) AS (
+  SELECT ST_RemoveRepeatedPoints( ST_MakeLine( ST_Point( x, y ) ORDER BY index ) ) FROM pts
+),
+svg AS ( SELECT geom, svgShape( geom,
+        style => svgStyle('stroke', '#0000ff')
+      ) AS svg
+    FROM dragon
 )
-SELECT ST_AsText(line) from dragon;
+SELECT svgDoc( array_agg( svg ),
+          viewbox => svgViewbox( ST_Expand( ST_Extent(geom), 5 )),
+          style => svgStyle('stroke-width', '0.3', 'stroke-linecap', 'round' )
+    ) AS svg
+  FROM svg;
