@@ -15,7 +15,7 @@ WITH RECURSIVE lsystem AS (
           iteration + 1 AS iteration
   FROM lsystem WHERE iteration < 5  -- Iteration parameter
 ),
-path AS ( SELECT replace(replace(state, 'A', ''), 'B', '') AS moves
+path AS ( SELECT replace(replace(replace(replace(state, 'A', ''), 'B', ''), '+-', ''), '-+', '') AS moves
   FROM (SELECT state FROM lsystem ORDER BY iteration DESC LIMIT 1) st
 ),
 pts(moves, index, dir, xp, yp, x, y, dx, dy, len) AS (
