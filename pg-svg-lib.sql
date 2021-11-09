@@ -227,6 +227,43 @@ $$
 LANGUAGE 'plpgsql' IMMUTABLE STRICT;
 
 ----------------------------------------
+-- Function: svgRect
+-- Parameters:
+--
+----------------------------------------
+CREATE OR REPLACE FUNCTION svgRect(
+  x float8,
+  y float8,
+  width float8,
+  height float8,
+  class text DEFAULT '',
+  id text DEFAULT '',
+  style text DEFAULT '',
+  attr text DEFAULT '',
+  title text DEFAULT ''
+)
+RETURNS text AS
+$$
+DECLARE
+  svg text;
+BEGIN
+  svg := '<rect '
+    || _svgAttr( class, id, style, attr)
+    || ' x="' || x || '" y="' || y
+    || '" width="' || width || '" height="' || height
+    || '" />';
+
+  IF title <> '' THEN
+    svg := '<g>' || svg;
+    svg := svg || '<title>' || title || '</title></g>';
+  END IF;
+
+  RETURN svg;
+END;
+$$
+LANGUAGE 'plpgsql' IMMUTABLE STRICT;
+
+----------------------------------------
 -- Function: svgText
 ----------------------------------------
 CREATE OR REPLACE FUNCTION svgText(
