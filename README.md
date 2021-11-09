@@ -36,10 +36,9 @@ envelope of the geometries being encoded.
 
 ### svgLinearGradient
 
-Returns an SVG `linearGradient` element.
-The element can be provided as a `def` to `svgDoc`.
-The gradient can be used as a `fill`
-value using the specifier `url(#id)`
+Returns an SVG `linearGradient` definition element.
+The element is provided as a `def` to `svgDoc`.
+The CSS `fill` property value refers to the gradient using the specifier `url(#id)`
 
 * `id` - the gradient id
 * `color1` - the start color of the gradient
@@ -56,19 +55,25 @@ Encodes a PostGIS geometry as an SVG shape.
 * `attr` - (opt) additional attributes
 * `title` - (opt) title
 
-Relevant style CSS properties include:
-
-* `text-anchor` - value of `start | middle | end | inherit`
-* `font` - full font specifier.  E.g. `10px Verdana,Helvetica,Arial,sans-serif`
-* `font-style` - value of `normal | italic | oblique`
-* `font-weight` - value of `normal | bold | bolder | lighter | <number>`
-
-
 ### svgPolygon
 
 Encodes an array of XY ordinates as an SVG `polygon`.
 
 * `pts` - array of X Y ordinates
+* `class` - (opt) class attribute
+* `id` - (opt) id attribute
+* `style` - (opt) style attribute value
+* `attr` - (opt) additional attributes
+* `title` - (opt) title
+
+### svgRect
+
+Encodes an array of XY ordinates as an SVG `polygon`.
+
+* `x` - X location of bottom-left corner
+* `y` - Y location of bottom-left corner
+* `width` - rectangle width
+* `height` - rectangle height
 * `class` - (opt) class attribute
 * `id` - (opt) id attribute
 * `style` - (opt) style attribute value
@@ -86,6 +91,13 @@ Encodes an array of XY ordinates as an SVG `polygon`.
 * `style` - (opt) style attribute value
 * `attr` - (opt) additional attributes
 * `title` - (opt) title
+
+Relevant style CSS properties include:
+
+* `text-anchor` - value of `start | middle | end | inherit`
+* `font` - full font specifier.  E.g. `10px Verdana,Helvetica,Arial,sans-serif`
+* `font-style` - value of `normal | italic | oblique`
+* `font-weight` - value of `normal | bold | bolder | lighter | <number>`
 
 ### svgStyle
 
