@@ -11,10 +11,8 @@ x(i) AS (   VALUES(0)
     ),
 z(ix, iy, cx, cy, x, y, i) AS (
     SELECT ix, iy, x::FLOAT, y::FLOAT, x::FLOAT, y::FLOAT, 0
-    FROM
-        (SELECT -2.2 + 0.0074 * i, i FROM x) AS xgen(x, ix)
-    CROSS JOIN
-        (SELECT -1.5 + 0.0074 * i, i FROM x) AS ygen(y, iy)
+      FROM        (SELECT -2.2 + 0.0074 * i, i FROM x) AS xgen(x, ix)
+      CROSS JOIN  (SELECT -1.5 + 0.0074 * i, i FROM x) AS ygen(y, iy)
     UNION ALL
     SELECT ix, iy, cx, cy,
         x*x - y*y + cx AS x,
@@ -25,8 +23,7 @@ z(ix, iy, cx, cy, x, y, i) AS (
     ),
 itermax (ix, iy, i) AS (
     SELECT ix, iy, MAX(i) AS i
-    FROM z
-    GROUP BY iy, ix
+    FROM z GROUP BY iy, ix
     ),
 runstart AS (
     SELECT iy, ix, I,
