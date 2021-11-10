@@ -37,5 +37,5 @@ shapes AS (
     ) svg FROM data
 )
 SELECT svgDoc( array_agg( svg ),
-  viewbox => svgViewbox( ST_Expand( ST_Extent(geom), 5 ))
+  viewbox => svgViewbox( ST_Expand( ST_Extent(geom), 10 ))
   ) AS svg FROM shapes;

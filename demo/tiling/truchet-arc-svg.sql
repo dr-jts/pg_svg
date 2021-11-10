@@ -1,5 +1,5 @@
 --========================================
--- Truchet tiling with Arc tiles
+-- Truchet tiling with SVG Arc tiles
 --========================================
 -- psql -A -t -o truchet-arc.svg  < truchet-arc-svg.sql
 
@@ -10,7 +10,7 @@ grid(x, y, type) AS (
     FROM generate_series(0, 20) AS t(x)
     CROSS JOIN generate_series(0, 20) as s(y)
 ),
-truchet( tile )  AS (
+truchet( svg )  AS (
     SELECT '<path d="' || CASE type WHEN 1 THEN
             'M ' || (x + 5) || ' ' || y
             || ' A 5 5 -45 0 1 ' || x || ' ' || (y + 5)
@@ -21,14 +21,11 @@ truchet( tile )  AS (
             || ' A 5 5 -45 0 1 ' || x + 5 || ' ' || y + 10
             || 'M ' || x + 5 || ' ' || y
             || ' A 5 5 -45 0 0 ' || x + 10 || ' ' || y + 5
-        END || '" '
-        || 'style="stroke:' || CASE type WHEN 1 THEN 'royalblue' ELSE 'royalblue' END || '" '
-        || ' />' AS tile
+        END
+        || '" />'
       FROM grid
 )
-SELECT '<svg viewBox="-5 -5 220 220" '
-    || 'style="stroke-width:3 ;stroke:royalblue; fill:none" xmlns="http://www.w3.org/2000/svg">'
-    || E'\n'
-    || string_agg( tile, E'\n' )
-    || E'\n' || '</svg>' || E'\n' AS svg
-  FROM truchet;
+SELECT svgDoc( array_agg( svg ),
+  viewbox => '-5 -5 220 220',
+  style => svgStyle('stroke-width', '3', 'stroke','royalblue')
+  ) AS svg FROM truchet;
