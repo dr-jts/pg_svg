@@ -13,31 +13,21 @@
 
 WITH RECURSIVE
 init(type, ax,ay, bx,by, cx,cy) AS (VALUES
-		( 'S',
-			100::float8, 0::float8,
-			0::float8, 0::float8,
-			100 * cos( pi() / 5 ), 100 * sin( pi() / 5 )
-		),
-		( 'S',
-			100 * cos( 2 * pi() / 5 ), 100 * sin( 2 * pi() / 5 ),
-			0::float8, 0::float8,
-			100 * cos( pi() / 5 ), 100 * sin( pi() / 5 )
-		),
-		( 'S',
-			100 * cos( 2 * pi() / 5 ), 100 * sin( 2 * pi() / 5 ),
-			0::float8, 0::float8,
-			100 * cos( 3 * pi() / 5 ), 100 * sin( 3 * pi() / 5 )
-		),
-		( 'S',
-			100 * cos( 4 * pi() / 5 ), 100 * sin( 4 * pi() / 5 ),
-			0::float8, 0::float8,
-			100 * cos( 3 * pi() / 5 ), 100 * sin( 3 * pi() / 5 )
-		),
-		( 'S',
-			100 * cos( 4 * pi() / 5 ), 100 * sin( 4 * pi() / 5 ),
-			0::float8, 0::float8,
-			-100::float8, 0::float8
-		)
+		( 'S',	100::float8, 0::float8,
+				0::float8, 0::float8,
+				100 * cos( pi() / 5 ), 100 * sin( pi() / 5 ) ),
+		( 'S',	100 * cos( 2 * pi() / 5 ), 100 * sin( 2 * pi() / 5 ),
+				0::float8, 0::float8,
+				100 * cos( pi() / 5 ), 100 * sin( pi() / 5 ) ),
+		( 'S',	100 * cos( 2 * pi() / 5 ), 100 * sin( 2 * pi() / 5 ),
+				0::float8, 0::float8,
+				100 * cos( 3 * pi() / 5 ), 100 * sin( 3 * pi() / 5 ) ),
+		( 'S',	100 * cos( 4 * pi() / 5 ), 100 * sin( 4 * pi() / 5 ),
+				0::float8, 0::float8,
+				100 * cos( 3 * pi() / 5 ), 100 * sin( 3 * pi() / 5 ) ),
+		( 'S',	100 * cos( 4 * pi() / 5 ), 100 * sin( 4 * pi() / 5 ),
+				0::float8, 0::float8,
+				-100::float8, 0::float8	)
 ),
 tri(i, type,  ax,ay, bx,by, cx,cy, psi, psi2) AS (
 	SELECT 0, *,
@@ -88,11 +78,12 @@ tri(i, type,  ax,ay, bx,by, cx,cy, psi, psi2) AS (
 		WHEN 5 THEN by END AS cy,
 
 		psi, psi2
-	FROM tri INNER JOIN (VALUES ( 'L', 1, 'L' ),
-		( 'L', 2, 'S' ),
-		( 'L', 3, 'L' ),
-		( 'S', 4, 'S'),
-		( 'S', 5, 'L') ) AS trimap(type, split, subtype)
+	FROM tri INNER JOIN (VALUES
+				( 'L', 1, 'L' ),
+				( 'L', 2, 'S' ),
+				( 'L', 3, 'L' ),
+				( 'S', 4, 'S'),
+				( 'S', 5, 'L') ) AS trimap(type, split, subtype)
 		ON tri.type = trimap.type
 	WHERE i <= 4 ),  				-- LEVEL
 toptri AS (	SELECT * FROM tri
