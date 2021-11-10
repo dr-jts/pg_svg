@@ -1,7 +1,7 @@
 --========================================
 -- Truchet tiling with CIRCULARSTRINGs merged into lines
 --========================================
--- psql -A -t -o truchet-curve-line.svg  < truchet-curve-line-svg.sql
+-- psql -A -t -o truchet-curve.svg  < truchet-curve-svg.sql
 
 WITH grid( type, x, y ) AS (
     SELECT CASE WHEN random() < 0.5 THEN 1 ELSE 2 END AS type,
@@ -10,14 +10,10 @@ WITH grid( type, x, y ) AS (
     CROSS JOIN generate_series(0, 20) as s(y)
 ),
 pts AS ( SELECT * FROM (VALUES
-            -- lower left
-        ( 1, 5, 0,   5 * 1/sqrt(2), 5 * 1/sqrt(2),   0,5 ),
-            -- upper right
-        ( 1, 5, 10,  10 - 5 * 1/sqrt(2), 10 - 5 * 1/sqrt(2),  10,5 ),
-            -- upper left
-        ( 2, 0, 5,   5 * 1/sqrt(2), 10 - 5 * 1/sqrt(2),   5,10 ),
-            -- lower right
-        ( 2, 5, 0,  10 - 5 * 1/sqrt(2), 5 * 1/sqrt(2),  10,5 )
+    ( 1, 5, 0,   5 * 1/sqrt(2), 5 * 1/sqrt(2),   0,5 ),             -- lower left
+    ( 1, 5, 10,  10 - 5 * 1/sqrt(2), 10 - 5 * 1/sqrt(2),  10,5 ),   -- upper right
+    ( 2, 0, 5,   5 * 1/sqrt(2), 10 - 5 * 1/sqrt(2),   5,10 ),       -- upper left
+    ( 2, 5, 0,  10 - 5 * 1/sqrt(2), 5 * 1/sqrt(2),  10,5 )          -- lower right
         ) AS t( type, sx, sy, mx, my, ex, ey )
 ),
 wkt( wkt ) AS ( SELECT format( 'CIRCULARSTRING( %s %s, %s %s, %s %s )',

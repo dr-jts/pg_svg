@@ -1,10 +1,9 @@
 --========================================
 -- Truchet tiling with CIRCULARSTRINGs, polygonized
 --========================================
--- psql -A -t -o truchet-curve-poly.svg  < truchet-curve-poly-svg.sql
+-- psql -A -t -o truchet-poly.svg  < truchet-poly-svg.sql
 
-WITH
-grid( type, s, x, y ) AS (
+WITH grid( type, s, x, y ) AS (
     SELECT CASE
         WHEN (i = 0 AND j = 0) OR (i = 19 AND j = 19) THEN 1
         WHEN (i = 0 AND j = 19) OR (i = 19 AND j = 0) THEN 2
@@ -13,24 +12,16 @@ grid( type, s, x, y ) AS (
     FROM generate_series(0, 19) AS t(i)
     CROSS JOIN generate_series(0, 19) AS s(j)
 ),
-pts AS (
-    SELECT * FROM (VALUES
-        ( 1, -- lower left
-            5, 0,   5 * 1/sqrt(2), 5 * 1/sqrt(2),   0,5
-         ),
-        ( 1, -- upper right
-            5, 10,  10 - 5 * 1/sqrt(2), 10 - 5 * 1/sqrt(2),  10,5
-        ),
-        ( 2, -- upper left
-            0, 5,   5 * 1/sqrt(2), 10 - 5 * 1/sqrt(2),   5,10
-         ),
-        ( 2, -- lower right
-            5, 0,  10 - 5 * 1/sqrt(2), 5 * 1/sqrt(2),  10,5
-        )
+pts AS ( SELECT * FROM (VALUES
+    ( 1, 5, 0,   5 * 1/sqrt(2), 5 * 1/sqrt(2),   0,5 ),             -- lower left
+    ( 1, 5, 10,  10 - 5 * 1/sqrt(2), 10 - 5 * 1/sqrt(2),  10,5 ),   -- upper right
+    ( 2, 0, 5,   5 * 1/sqrt(2), 10 - 5 * 1/sqrt(2),   5,10 ),       -- upper left
+    ( 2, 5, 0,  10 - 5 * 1/sqrt(2), 5 * 1/sqrt(2),  10,5 )          -- lower right
         ) AS t( type,  sx, sy,   mx, my,   ex, ey )
 ),
 arcs (sx, sy,   mx, my,   ex, ey) AS (
-    SELECT x+sx,y+sy,    x+mx,y+my,    x+ex,y+ey  from grid JOIN pts ON grid.type = pts.type
+    SELECT x+sx,y+sy,    x+mx,y+my,    x+ex,y+ey
+    FROM grid JOIN pts ON grid.type = pts.type
 ),
 ordEdge AS (
     SELECT * FROM generate_series(0, 19,
@@ -51,10 +42,8 @@ arcsAll AS (
     UNION SELECT * FROM arcsEdge
 ),
 wkt( wkt )  AS (
-    SELECT
-        format( 'CIRCULARSTRING( %s %s, %s %s, %s %s )',
-            sx,sy,    mx,my,    ex,ey )
-        AS wkt
+    SELECT format( 'CIRCULARSTRING( %s %s, %s %s, %s %s )',
+                    sx,sy,    mx,my,    ex,ey )
       FROM arcsAll
 ),
 curve( geom ) AS (
@@ -74,7 +63,7 @@ shapes AS (
             svgHSL( svgRandPick( svgRandInt(160, 200), svgRandInt(270, 300) ),
                     svgRandInt(70, 100),
                     svgRandInt(20, 60) )
-             ,'stroke', '#ffffff', 'stroke-width', '1.5'
+                        ,'stroke', '#ffffff', 'stroke-width', '1.5'
             )
     ) svg FROM data
 )
