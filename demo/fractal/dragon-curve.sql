@@ -10,7 +10,7 @@ lsystem( iter, state ) AS (
   SELECT 0 AS iter, 'FA' AS state
   UNION ALL
   SELECT iter + 1 AS iter,
-    replace(replace(replace(state, 'A', 'A+zF+'), 'B', '-FA-B'), 'z', 'B') AS state
+    replace(replace(replace(state, 'A', 'A+Fz'), 'B', 'FA-B'), 'z', 'B') AS state
   FROM lsystem WHERE iter < 10      -- Parameter: iter
 ),
 path( moves ) AS (
