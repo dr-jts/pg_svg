@@ -14,10 +14,11 @@ WITH spiralStep AS (
   FROM generate_series( 0, 5    -- Parameter: # rings = 5
                            * 80) t(i)   -- circleSegs value
 ),
-spiral AS (SELECT ST_MakeLine( ARRAY_AGG(
+spiral AS (SELECT ST_MakeLine(
     ST_Point( centerX + (radius / circleSegs) * i * cos( i * (2 * pi() / circleSegs) ),
               centerY + (radius / circleSegs) * i * sin( i * (2 * pi() / circleSegs) ) )
-  )) AS geom
+    ORDER By i
+  ) AS geom
   FROM spiralStep
 ),
 shapes AS (
