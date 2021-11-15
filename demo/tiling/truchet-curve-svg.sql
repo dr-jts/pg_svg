@@ -1,7 +1,9 @@
---========================================
+--===========================================================
 -- Truchet tiling with CIRCULARSTRINGs merged into lines
---========================================
+-- Author: Martin Davis  2021
+
 -- psql -A -t -o truchet-curve.svg  < truchet-curve-svg.sql
+--===========================================================
 
 WITH grid( type, x, y ) AS (
     SELECT CASE WHEN random() < 0.5 THEN 1 ELSE 2 END AS type,
@@ -23,7 +25,7 @@ wkt( wkt ) AS ( SELECT format( 'CIRCULARSTRING( %s %s, %s %s, %s %s )',
 curve( geom ) AS (
     SELECT ST_CurveToLine( wkt::geometry ) geom FROM wkt
 ),
-data( geom ) AS (
+lines( geom ) AS (
     SELECT (ST_Dump ( ST_LineMerge( ST_Collect(geom)  ) ) ).geom FROM curve
 ),
 shapes AS (
@@ -34,7 +36,7 @@ shapes AS (
                                     svgRandInt(70, 100),
                                     svgRandInt(40, 80) ),
                             'stroke-width', '3' )
-    ) svg FROM data
+    ) svg FROM lines
 )
 SELECT svgDoc( array_agg( svg ),
   viewbox => svgViewbox( ST_Expand( ST_Extent(geom), 10 ))

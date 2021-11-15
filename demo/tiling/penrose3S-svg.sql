@@ -1,5 +1,6 @@
 --================================================
 -- Penrose P3 Tiling created by inflation, initialized by 5 S triangles
+-- Author: Martin Davis  2021
 
 -- Initial state is 5 S triangles in a fan in the positive Y halfplane
 -- and centred at the origin.

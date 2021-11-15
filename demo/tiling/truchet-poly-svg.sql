@@ -1,7 +1,9 @@
---========================================
+--===========================================================
 -- Truchet tiling with CIRCULARSTRINGs, polygonized
---========================================
+-- Author: Martin Davis  2021
+
 -- psql -A -t -o truchet-poly.svg  < truchet-poly-svg.sql
+--===========================================================
 
 WITH grid( type, s, x, y ) AS (
     SELECT CASE

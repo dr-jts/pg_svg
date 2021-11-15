@@ -1,5 +1,6 @@
 --================================================
 -- Penrose P3 Tiling created by inflation, initialized by single L triangle
+-- Author: Martin Davis  2021
 
 -- Initial triangle is an L triangle ABC with long edge A-C of length 200
 -- lying along X axis and centred at the origin
