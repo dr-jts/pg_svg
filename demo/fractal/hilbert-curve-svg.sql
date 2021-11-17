@@ -8,16 +8,20 @@
 -- psql -A -t -o hilbert-curve.svg  < hilbert-curve-svg.sql
 -- ---------------------------------
 
-WITH RECURSIVE lsystem AS (
+WITH RECURSIVE
+-- recursively generate L-system output string
+lsystem AS (
   SELECT 'A' AS state, 0 AS iteration
   UNION ALL
   SELECT replace(replace(replace(state, 'A', '-CF+AFA+FC-'), 'B', '+AF-BFB-FA+'), 'C', 'B'),
           iteration + 1 AS iteration
   FROM lsystem WHERE iteration < 5  -- Iteration parameter
 ),
-path AS ( SELECT replace(replace(replace(replace(state, 'A', ''), 'B', ''), '+-', ''), '-+', '') AS moves
+-- clean and optimize drawing commands
+path(moves) AS ( SELECT replace(replace(replace(replace(state, 'A', ''), 'B', ''), '+-', ''), '-+', '')
   FROM (SELECT state FROM lsystem ORDER BY iteration DESC LIMIT 1) st
 ),
+-- iterate over draw commands to create segments
 pts(moves, index, dir, xp, yp, x, y, dx, dy, len) AS (
   SELECT moves, 1, ' ',  0, 0, 0, 0, 1, 0, 0 FROM path
   UNION ALL
