@@ -13,8 +13,7 @@ shapes AS (
             title => 'Delaunay Triangulation',
             style => svgStyle('fill', '#a0a0ff',
                         'stroke', '#0000ff',
-                        'stroke-width', 1::text,
-                        'stroke-linejoin', 'round' ) )
+                        'stroke-width', 1::text ) )
     AS svg FROM data
   UNION ALL
   SELECT svgShape( geom, radius => 2,
