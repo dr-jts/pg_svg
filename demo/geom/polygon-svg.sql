@@ -6,7 +6,7 @@
 ------------------------------------------------------------------
 
 WITH data AS (
-  SELECT 'POLYGON ((20 20, 30 80, 80 90, 60 50, 90 20, 20 20))'::geometry AS geom
+  SELECT 'POLYGON ((20 20, 30 80, 80 90, 60 50, 90 20, 20 20), (40 60, 30 30, 60 30, 40 60))'::geometry AS geom
 ),
 shapes AS (
   SELECT geom, svgShape( geom,
