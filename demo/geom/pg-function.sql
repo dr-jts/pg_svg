@@ -39,7 +39,8 @@ doc AS (SELECT name, svgDoc( ARRAY[ svg ],
     viewbox => svgViewbox( ST_Expand( env, 5) )
   ) AS svg FROM shapes
 )
-SELECT '<html><body>' || E'\n'
-      || string_agg( '<h2>' || name || '</h2>' || E'\n' || svg, E'\n' )
-      || '</body></html>' || E'\n'
+SELECT '<html><body><table>' || E'\n'
+      || string_agg( '<tr><td><h2>' || name || '</h2></td><td>'
+      || svg || '</td></tr>', E'\n' )
+      || '</table></body></html>' || E'\n'
       FROM doc;
