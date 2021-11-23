@@ -6,8 +6,10 @@
 
 ![](penrose3S.svg)
 
-## Fractals
+## Truchet Tilings
 
-### Mandelbrot Set
+![](truchet-arc.svg)
 
-![](mandelbrot-rle.svg)
+![](truchet-curve.svg)
+
+![](truchet-poly.svg)
