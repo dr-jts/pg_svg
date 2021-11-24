@@ -10,14 +10,18 @@ WITH data(geom, mask) AS (
   , NULL
 ),
 dataMask(geom, mask) AS (
-  SELECT geom, ST_Expand(geom, -30) AS mask FROM data
+  SELECT geom, ST_Difference(ST_Expand(geom, -20), ST_Expand(geom, -40)) AS mask FROM data
 ),
 funUnary(name, geom, result) AS (
   SELECT 'ST_Centroid', geom, ST_Centroid(geom) FROM data
   UNION ALL
   SELECT 'ST_PointOnSurface', geom, ST_PointOnSurface(geom) FROM data
   UNION ALL
+  SELECT 'ST_Boundary', geom, ST_Boundary(geom) FROM data
+  UNION ALL
   SELECT 'ST_Buffer', geom, ST_Buffer(geom, 10) FROM data
+  UNION ALL
+  SELECT 'ST_Buffer (negative)', geom, ST_Buffer(geom, -3) FROM data
   UNION ALL
   SELECT 'ST_ConvexHull', geom, ST_ConvexHull(geom) FROM data
   UNION ALL
@@ -33,13 +37,24 @@ funUnary(name, geom, result) AS (
   UNION ALL
   SELECT 'ST_DelaunayTriangles', geom, ST_DelaunayTriangles(geom) FROM data
   UNION ALL
-  SELECT 'ST_ReducePrecision', geom, ST_ReducePrecision(geom, 5) FROM data
+  SELECT 'ST_ReducePrecision', geom, ST_ReducePrecision(geom, 8) FROM data
   UNION ALL
   SELECT 'ST_SimplifyPreserveTopology', geom, ST_SimplifyPreserveTopology(geom, 5) FROM data
   UNION ALL
   SELECT 'ST_SimplifyVW', geom, ST_SimplifyVW(geom, 20) FROM data
   UNION ALL
+  SELECT 'ST_ChaikinSmoothing', geom, ST_ChaikinSmoothing(geom, 5) FROM data
+  UNION ALL
   SELECT 'ST_GeneratePoints', geom, ST_GeneratePoints(geom, 500) FROM data
+  UNION ALL
+  SELECT 'ST_Rotate', geom, ST_Rotate(geom, 0.3, ST_Centroid(geom)) FROM data
+  UNION ALL
+  SELECT 'ST_Scale', geom, ST_Scale(geom, 'POINT(0.5 0.5)', ST_Centroid(geom)) FROM data
+  UNION ALL
+  SELECT 'ST_Translate', geom, ST_Translate(geom, 20, 20) FROM data
+  UNION ALL
+  SELECT 'ST_Subdivide', MAX(geom)::geometry, ST_Collect(result)
+      FROM (SELECT geom, ST_Subdivide(geom, 20) AS result FROM data) AS s
 ),
 funBinary(name, geom, mask, result) AS (
   SELECT 'ST_Intersection', geom, mask, ST_Intersection(geom, mask) FROM dataMask
@@ -66,13 +81,13 @@ svgUnary AS (
 svgBinary AS (
   SELECT name,
         svgShape( geom,
-            style => svgStyle('fill', '#a0a0ff', 'fill-opacity', '33%',
-                        'stroke', '#0606ff',
+            style => svgStyle('fill', '#a0a0ff', 'fill-opacity', '30%',
+                        'stroke', '#a0a0ff',
                         'stroke-width', '0.3%' ) )
         || svgShape( mask,
-            style => svgStyle('fill', '#ffa0a0', 'fill-opacity', '33%',
-                        'stroke', '#ff0000',
-                        'stroke-width', '0.3%' ) )
+            style => svgStyle('fill', '#ffc0c0', 'fill-opacity', '30%',
+                        'stroke', '#ff8080',
+                        'stroke-width', '0.2%' ) )
         || svgShape( result, radius => 1,
             style => svgStyle('fill', '#ffffc0',
                         'stroke', '#000000',
