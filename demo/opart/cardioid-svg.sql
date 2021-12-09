@@ -1,7 +1,7 @@
 ------------------------------------------------------------------
 -- Demo of using SVG functions to display Cardioid from tangent
 --	line sigments 
--- Author: Brucr Rindahl
+-- Author: Bruce Rindahl
 
 -- psql -At -o cardioid.svg  < cardioid-svg.sql
 ------------------------------------------------------------------
