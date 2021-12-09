@@ -27,6 +27,8 @@ funUnary(name, geom, result) AS (
   UNION ALL
   SELECT 'ST_Buffer (negative)', geom, ST_Buffer(geom, -3) FROM data
   UNION ALL
+  SELECT 'ST_OffsetCurve', geom, ST_OffsetCurve(ST_Boundary(geom), 5) FROM data
+  UNION ALL
   SELECT 'ST_ConvexHull', geom, ST_ConvexHull(geom) FROM data
   UNION ALL
   SELECT 'ST_ConcaveHull', geom, ST_ConcaveHull(geom, 0.9) FROM data
