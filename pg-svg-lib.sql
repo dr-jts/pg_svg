@@ -359,7 +359,9 @@ LANGUAGE 'plpgsql' IMMUTABLE STRICT;
 ----------------------------------------
 CREATE OR REPLACE FUNCTION svgStyleProp(
   stroke text DEFAULT '',
-  stroke_width real DEFAULT -1,
+  strokewidth text DEFAULT '',
+  fill text DEFAULT '',
+  fillopacity text DEFAULT '',
   css text[] DEFAULT ARRAY[]::text[]
 )
 RETURNS text AS
@@ -370,13 +372,20 @@ BEGIN
 
   style := '';
   IF stroke <> '' THEN
-    style := ' stroke:' || stroke || ';';
+    style := ' stroke: ' || stroke || ';';
   END IF;
-  IF stroke_width >= 0 THEN
-    style :=  style || ' stroke-width:' || stroke_width || ';';
+  IF strokewidth <> '' THEN
+    style :=  style || ' stroke-width: ' || strokewidth || ';';
   END IF;
+  IF fill <> '' THEN
+    style :=  style || ' fill: ' || fill || ';';
+  END IF;
+  IF fillopacity <> '' THEN
+    style :=  style || ' fill-opacity: ' || fillopacity || ';';
+  END IF;
+
   FOR i IN 1..array_length( css, 1)/2 LOOP
-    style := style || ' ' || css[2*i-1] || ':' || css[2*i] || ';';
+    style := style || ' ' || css[2*i-1] || ': ' || css[2*i] || ';';
   END LOOP;
 
   RETURN style;
