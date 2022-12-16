@@ -1,12 +1,12 @@
 -- ---------------------------------
 -- Lissajous curve, as SVG
 
--- psql -A -t -o lissajous-curve-34.svg  < lissajous-curve-34-svg.sql
+-- psql -A -t -o lissajous-curve-45.svg  < lissajous-curve-45-svg.sql
 -- ---------------------------------
 
 WITH angs AS (
-  SELECT  3 AS a,
-          4 As b,
+  SELECT  4 AS a,
+          5 As b,
           0.0 as phase,
           0.02 AS step,
           generate_series(0.0, 2*pi()::numeric, 0.02) AS ang
@@ -19,12 +19,7 @@ seg AS (
   FROM angs
 ),
 svg AS ( SELECT geom, svgShape( geom,
-        style => svgStyle('stroke',
-                    svgHSL( 250, -- 240 + 30 * sin(4 * ang - pi()/2),
-                      80 + 20 * sin(6 * ang),
-                      -- 100,
-                      60 + 20 * sin(ang - pi()/6)
-                    ))
+        style => svgStyle('stroke', svgHSL( 360 * sin(ang/4), 100, 60))
       ) AS svg
     FROM seg
 )

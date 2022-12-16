@@ -7,3 +7,5 @@
 ![](lissajous-curve-14.svg)
 
 ![](lissajous-curve-34.svg)
+
+![](lissajous-curve-45.svg)

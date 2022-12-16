@@ -1,9 +1,5 @@
 -- ---------------------------------
 -- Lissajous curve, as SVG
---
--- Parameter: iteration
--- iteration dependent values in SVG:
---   id divisor hsl function
 
 -- psql -A -t -o lissajous-curve-14.svg  < lissajous-curve-14-svg.sql
 -- ---------------------------------
