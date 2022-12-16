@@ -135,7 +135,11 @@ CSS color specifiers include:
 
 ### svgHSL
 
-Encodes H,S,L values as a CSS HSL function `hsl(H,S,L)`
+Encodes Hue,Saturation,Lightness values as a CSS HSL function `hsl(H,S,L)`.
+
+* Hue is a value in degrees (from 0 through 360, with 0 = red, 120 = green, and 240 = blue)
+* Saturation is a percentage
+* Lightness is a percentage
 
 ### svgRandInt
 
