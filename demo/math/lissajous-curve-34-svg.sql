@@ -16,16 +16,16 @@ WITH angs AS (
           generate_series(0.0, 2*pi()::numeric, 0.02) AS ang
 ),
 seg AS (
-    SELECT ang, ST_MakeLine(
-        ST_Point( sin(a * ang),        sin(b * ang          + phase)),
-        ST_Point( sin(a * (ang + step)), sin(b * (ang + step) + phase))
-    ) AS geom
-    FROM angs
+  SELECT ang, ST_MakeLine(
+      ST_Point( sin(a * ang),        sin(b * ang          + phase)),
+      ST_Point( sin(a * (ang + step)), sin(b * (ang + step) + phase))
+  ) AS geom
+  FROM angs
 ),
 svg AS ( SELECT geom, svgShape( geom,
         style => svgStyle('stroke',
                     svgHSL( 250, -- 240 + 30 * sin(4 * ang - pi()/2),
-                      60 + 20 * sin(2 * ang - pi()/6),
+                      80 + 20 * sin(6 * ang),
                       -- 100,
                       60 + 20 * sin(ang - pi()/6)
                     ))
