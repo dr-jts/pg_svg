@@ -2,6 +2,8 @@
 
 ### Lissajous Curves
 
-![](lissajous-13.svg.svg)
-![](lissajous-14.svg.svg)
-![](lissajous-34.svg.svg)
+![](lissajous-curve-13.svg.svg)
+
+![](lissajous-curve-14.svg.svg)
+
+![](lissajous-curve-34.svg.svg)
