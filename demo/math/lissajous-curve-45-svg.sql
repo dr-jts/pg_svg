@@ -5,16 +5,16 @@
 -- ---------------------------------
 
 WITH angs AS (
-  SELECT  4 AS a,
-          5 As b,
-          0.0 as phase,
-          0.02 AS step,
+  SELECT  4 AS NX,
+          5 AS NY,
+          0.0 AS PHASE,
+          0.02 AS STEP,
           generate_series(0.0, 2*pi()::numeric, 0.02) AS ang
 ),
 seg AS (
   SELECT ang, ST_MakeLine(
-      ST_Point( sin(a * ang),        sin(b * ang          + phase)),
-      ST_Point( sin(a * (ang + step)), sin(b * (ang + step) + phase))
+      ST_Point( sin(NX * ang),          sin(NY * ang          + PHASE)),
+      ST_Point( sin(NX * (ang + STEP)), sin(NY * (ang + STEP) + PHASE))
   ) AS geom
   FROM angs
 ),
