@@ -417,8 +417,8 @@ LANGUAGE 'plpgsql' IMMUTABLE STRICT;
 -- Encodes HSL function call
 -- Parameters:
 -- hue : value from 0 to 360
--- saturation : percentage value (default 100)
--- lightness : percentage (default 50)
+-- saturation : percentage value in 0..100 (default 100)
+-- lightness : percentage value in 0..100 (default 50)
 ----------------------------------------
 CREATE OR REPLACE FUNCTION svgHSL(
   hue float8,
