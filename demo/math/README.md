@@ -9,3 +9,5 @@
 ![](lissajous-curve-34.svg)
 
 ![](lissajous-curve-45.svg)
+
+![](lissajous-knot-34.svg)
