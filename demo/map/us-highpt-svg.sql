@@ -2,24 +2,36 @@
 -- Demo of using SVG functions to display
 -- map of High Points in each of the United States
 
--- Author: Martin Davis  2021
+-- Author: Martin Davis  2023
 
 -- Requires:
---    Table ne.us_state - US states geometry in WGS84
+--    Table ne.admin_1_state_prov - World map in WGS84
 
 -- psql -A -t -o us-highpt.svg  < us-highpt-svg.sql
 ------------------------------------------------------------------
 
-WITH lower48 AS (SELECT name, abbrev, postal, geom FROM ne.us_state
-                WHERE ST_YMax(geom) < 50
-                  AND ST_YMin(geom) > 23 )
+WITH 
+us_state AS (SELECT name, abbrev, postal, geom 
+  FROM ne.admin_1_state_prov
+  WHERE adm0_a3 = 'USA')
+,us_map AS (SELECT name, abbrev, postal, 
+    CASE WHEN name = 'Alaska' THEN 
+      ST_Translate(ST_Scale(
+        ST_Intersection( ST_GeometryN(geom,1), 'SRID=4326;POLYGON ((-141 80, -141 50, -170 50, -170 80, -141 80))'),
+        'POINT(0.5 0.75)', 'POINT(-151.007222 63.069444)'::geometry), 18, -17)
+    WHEN name = 'Hawaii' THEN 
+      ST_Translate(ST_Scale(
+        ST_Intersection(geom, 'SRID=4326;POLYGON ((-161 23, -154 23, -154 18, -161 18, -161 23))'), 
+        'POINT(3 3)', 'POINT(-155.468333 19.821028)'::geometry), 32, 10)
+    ELSE geom END AS geom
+  FROM us_state)
 ,high_pt(name, state, hgt_m, hgt_ft, lon, lat) AS (VALUES
--- ('Mount McKinley',      'AK', 6198, 20320,  -151.007222,63.069444)
- ('Mount Whitney',       'CA', 4421, 14505,  -118.292,36.578583)
+ ('Denali',              'AK', 6198, 20320,  -151.007222,63.069444)
+,('Mount Whitney',       'CA', 4421, 14505,  -118.292,36.578583)
 ,('Mount Elbert',        'CO', 4401, 14440,  -106.445358,39.11775)
 ,('Mount Rainier',       'WA', 4395, 14410,  -121.759889,46.853306)
 ,('Gannett Peak',        'WY', 4210, 13804,  -109.653333,43.184444)
---,('Mauna Kea',           'HI', 4208, 13796,  -155.468333,19.821028)
+,('Mauna Kea',           'HI', 4208, 13796,  -155.468333,19.821028)
 ,('Kings Peak',          'UT', 4126, 13528,  -110.372778,40.776111)
 ,('Wheeler Peak',        'NM', 4014, 13161,  -105.416953,36.556697)
 ,('Boundary Peak',       'NV', 4007, 13140,  -118.3513,37.846097)
@@ -66,7 +78,13 @@ WITH lower48 AS (SELECT name, abbrev, postal, geom FROM ne.us_state
 ,('Fort Reno',           'DC',  125,   410,  -77.07686,38.95267)
 ,('Britton Hill',        'FL',  105,   345,  -86.281944,30.988333)
 )
-,highpt_geom AS (SELECT name, state, hgt_ft, lon, lat,
+,highpt_geom AS (SELECT name, state, hgt_ft, 
+    CASE WHEN state = 'AK' THEN lon + 18
+      WHEN state = 'HI' THEN lon + 32
+      ELSE lon END AS lon,
+    CASE WHEN state = 'AK' THEN lat - 17
+      WHEN state = 'HI' THEN lat + 10
+      ELSE lat END AS lat,
     (2.0 * hgt_ft) / 15000.0 + 0.5 AS symHeight,
     CASE WHEN hgt_ft > 14000 THEN '#ffffff'
          WHEN hgt_ft >  7000 THEN '#aaaaaa'
@@ -83,11 +101,11 @@ WITH lower48 AS (SELECT name, abbrev, postal, geom FROM ne.us_state
                         'stroke-width', 0.1::text,
                         'fill', 'url(#state)',
                         'stroke-linejoin', 'round' ) )
-    svg FROM lower48
+    svg FROM us_map
   UNION ALL
   SELECT NULL, svgText( ST_PointOnSurface( geom ), abbrev,
     style => svgStyle(  'fill', '#6666ff', 'text-anchor', 'middle', 'font', '0.8px sans-serif' ) )
-    svg FROM lower48
+    svg FROM us_map
   UNION ALL
   SELECT NULL, svgPolygon( ARRAY[ lon-0.5, -lat, lon+0.5, -lat, lon, -lat-symHeight ],
     title => name || ' ' || state || ' - ' || hgt_ft || ' ft',
