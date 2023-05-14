@@ -79,7 +79,7 @@ us_state AS (SELECT name, abbrev, postal, geom
 ,('Fort Reno',           'DC',  125,   410,  -77.07686,38.95267)
 ,('Britton Hill',        'FL',  105,   345,  -86.281944,30.988333)
 )
-,highpt_geom AS (SELECT name, state, hgt_ft, 
+,highpt_shape AS (SELECT name, state, hgt_ft, 
     -- translate high points to match shifted states
     CASE WHEN state = 'AK' THEN lon + 18
       WHEN state = 'HI' THEN lon + 32
@@ -117,7 +117,7 @@ us_state AS (SELECT name, abbrev, postal, geom
     style => svgStyle(  'stroke', '#000000',
                         'stroke-width', 0.1::text,
                         'fill', clr  ) )
-    svg FROM highpt_geom
+    svg FROM highpt_shape
 )
 SELECT svgDoc( array_agg( svg ),
     viewbox => svgViewbox( ST_Expand( ST_Extent(geom), 2)),
