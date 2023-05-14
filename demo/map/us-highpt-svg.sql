@@ -15,6 +15,7 @@ us_state AS (SELECT name, abbrev, postal, geom
   FROM ne.admin_1_state_prov
   WHERE adm0_a3 = 'USA')
 ,us_map AS (SELECT name, abbrev, postal, 
+    -- transform AK and HI to make them fit map
     CASE WHEN name = 'Alaska' THEN 
       ST_Translate(ST_Scale(
         ST_Intersection( ST_GeometryN(geom,1), 'SRID=4326;POLYGON ((-141 80, -141 50, -170 50, -170 80, -141 80))'),
@@ -79,6 +80,7 @@ us_state AS (SELECT name, abbrev, postal, geom
 ,('Britton Hill',        'FL',  105,   345,  -86.281944,30.988333)
 )
 ,highpt_geom AS (SELECT name, state, hgt_ft, 
+    -- translate high points to match shifted states
     CASE WHEN state = 'AK' THEN lon + 18
       WHEN state = 'HI' THEN lon + 32
       ELSE lon END AS lon,
@@ -93,8 +95,9 @@ us_state AS (SELECT name, abbrev, postal, geom
          WHEN hgt_ft >  1000 THEN '#aaffaa'
                              ELSE '#558800'
     END AS clr
-    FROM high_pt ORDER BY lat DESC)
+  FROM high_pt ORDER BY lat DESC)
 ,shapes AS (
+  -- State shapes
   SELECT geom, svgShape( geom,
     title => name,
     style => svgStyle(  'stroke', '#ffffff',
@@ -103,10 +106,12 @@ us_state AS (SELECT name, abbrev, postal, geom
                         'stroke-linejoin', 'round' ) )
     svg FROM us_map
   UNION ALL
+  -- State names
   SELECT NULL, svgText( ST_PointOnSurface( geom ), abbrev,
     style => svgStyle(  'fill', '#6666ff', 'text-anchor', 'middle', 'font', '0.8px sans-serif' ) )
     svg FROM us_map
   UNION ALL
+  -- High point triangles
   SELECT NULL, svgPolygon( ARRAY[ lon-0.5, -lat, lon+0.5, -lat, lon, -lat-symHeight ],
     title => name || ' ' || state || ' - ' || hgt_ft || ' ft',
     style => svgStyle(  'stroke', '#000000',
