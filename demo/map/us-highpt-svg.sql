@@ -11,7 +11,10 @@
 ------------------------------------------------------------------
 
 WITH 
-us_map AS (SELECT name, abbrev, postal, 
+us_state AS (SELECT name, abbrev, postal, geom 
+  FROM ne.admin_1_state_prov
+  WHERE adm0_a3 = 'USA')
+,us_map AS (SELECT name, abbrev, postal, 
     -- transform AK and HI to make them fit map
     CASE WHEN name = 'Alaska' THEN 
       ST_Translate(ST_Scale(
@@ -22,8 +25,7 @@ us_map AS (SELECT name, abbrev, postal,
         ST_Intersection(geom, 'SRID=4326;POLYGON ((-161 23, -154 23, -154 18, -161 18, -161 23))'), 
         'POINT(3 3)', 'POINT(-155.468333 19.821028)'::geometry), 32, 10)
     ELSE geom END AS geom
-  FROM ne.admin_1_state_prov
-  WHERE adm0_a3 = 'USA')
+  FROM us_state)
 ,high_pt(name, state, hgt_m, hgt_ft, lon, lat) AS (VALUES
  ('Denali',              'AK', 6198, 20320,  -151.007222,63.069444)
 ,('Mount Whitney',       'CA', 4421, 14505,  -118.292,36.578583)
