@@ -27,8 +27,9 @@ WHERE  proname LIKE 'svg%' AND pg_function_is_visible(oid);
 
 Creates an SVG doc element from an array of content elements.
 
-* `content` - an array of strings output as the content of the `<svg>` element
+* `content` - an array of `text` values output as the content of the `<svg>` element
 * `viewbox` - (opt) value of SVG viewBox attribute ( x y width height )
+  * see [`svgViewbox`](#svgViewbox)
 * `width` (opt) - width of view
 * `height` (opt) - height of view
 * `style` (opt) - specifies CSS styling at the document level
@@ -39,10 +40,11 @@ Creates an SVG doc element from an array of content elements.
 ### svgViewbox
 
 Returns an SVG `viewBox` attribute value determined from the envelope of a geometry.
+
+* `extent` - a `geometry` providing the envelope to encode.
+
 The PostGIS `ST_Extent` aggregate function can be use to determine the overall
 envelope of the geometries being encoded.
-
-* `extent` - (opt) a `geometry` providing the envelope to encode.
 
 ### svgLinearGradient
 
