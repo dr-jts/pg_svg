@@ -28,14 +28,13 @@ WHERE  proname LIKE 'svg%' AND pg_function_is_visible(oid);
 Creates an SVG doc element from an array of content elements.
 
 * `content` - an array of `text` values output as the content of the `<svg>` element
-* `viewbox` - (opt) value of SVG viewBox attribute ( x y width height )
+* `viewbox` - (opt) value of SVG viewBox attribute ( `x y width height` )
   * see [`svgViewbox`](#svgViewbox)
 * `width` (opt) - width of view
 * `height` (opt) - height of view
-* `style` (opt) - specifies CSS styling at the document level
-  * see `svgStyle` function
+* `style` (opt) - specifies CSS styling at the document level  (see [`svgStyle`](#svgStyle) )
 * `def` (opt) - specifies a definition
-  * see `svgLinearGradient` function
+  * see [`svgLinearGradient`](#svgLinearGradient)
 
 ### svgViewbox
 
@@ -50,7 +49,7 @@ envelope of the geometries being encoded.
 
 Returns an SVG `linearGradient` definition element.
 The element is provided as a `def` to `svgDoc`.
-The CSS `fill` property value refers to the gradient using the specifier `url(#id)`
+A CSS `fill` property value can refer to the gradient using the specifier `url(#id)`
 
 * `id` - the gradient id
 * `color1` - the start color of the gradient
@@ -63,7 +62,7 @@ Encodes a PostGIS geometry as an SVG shape.
 * `geom` - geometry to encode
 * `class` - (opt) class attribute
 * `id` - (opt) id attribute
-* `style` - (opt) style attribute value
+* `style` - (opt) style attribute value (see [`svgStyle`](#svgStyle) )
 * `attr` - (opt) additional attributes
 * `title` - (opt) title
 
@@ -74,7 +73,7 @@ Encodes an array of XY ordinates as an SVG `polygon`.
 * `pts` - array of X Y ordinates
 * `class` - (opt) class attribute
 * `id` - (opt) id attribute
-* `style` - (opt) style attribute value
+* `style` - (opt) style attribute value (see [`svgStyle`](#svgStyle) )
 * `attr` - (opt) additional attributes
 * `title` - (opt) title
 
@@ -88,7 +87,7 @@ Encodes an array of XY ordinates as an SVG `polygon`.
 * `height` - rectangle height
 * `class` - (opt) class attribute
 * `id` - (opt) id attribute
-* `style` - (opt) style attribute value
+* `style` - (opt) style attribute value (see [`svgStyle`](#svgStyle) )
 * `attr` - (opt) additional attributes
 * `title` - (opt) title
 
