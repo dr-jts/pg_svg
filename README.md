@@ -28,12 +28,12 @@ WHERE  proname LIKE 'svg%' AND pg_function_is_visible(oid);
 Creates an SVG doc element from an array of content elements.
 
 * `content` - an array of `text` values output as the content of the `<svg>` element
-* `viewbox` - *optional* value of SVG viewBox attribute ( `x y width height` )
+* `viewbox` - *[optional]* value of SVG viewBox attribute ( `x y width height` )
   * see [`svgViewbox`](#svgViewbox)
-* `width` - *optional* width of view
-* `height` - *optional* height of view
-* `style` - *optional* specifies CSS styling at the document level  (see [`svgStyle`](#svgStyle) )
-* `def` - *optional* specifies a definition
+* `width` - *[optional]* width of view
+* `height` - *[optional]* height of view
+* `style` - *[optional]* specifies CSS styling at the document level  (see [`svgStyle`](#svgStyle) )
+* `def` - *[optional]* specifies a definition
   * see [`svgLinearGradient`](#svgLinearGradient)
 
 ### svgViewbox
@@ -60,22 +60,22 @@ A CSS `fill` property value can refer to the gradient using the specifier `url(#
 Encodes a PostGIS geometry as an SVG shape.
 
 * `geom` - geometry to encode
-* `class` - *(optional)* class attribute
-* `id` - *(optional)* id attribute
-* `style` - *(optional)* style attribute value (see [`svgStyle`](#svgStyle) )
-* `attr` - *(optional)* additional attributes
-* `title` - *(optional)* title
+* `class` - *[optional]* class attribute
+* `id` - *[optional]* id attribute
+* `style` - *[optional]* style attribute value (see [`svgStyle`](#svgStyle) )
+* `attr` - *[optional]* additional attributes
+* `title` - *[optional]* title
 
 ### svgPolygon
 
 Encodes an array of XY ordinates as an SVG `polygon`.
 
 * `pts` - array of X Y ordinates
-* `class` - *(optional)* class attribute
-* `id` - *(optional)* id attribute
-* `style` - *(optional)* style attribute value (see [`svgStyle`](#svgStyle) )
-* `attr` - *(optional)* additional attributes
-* `title` - *(optional)* title
+* `class` - *[optional]* class attribute
+* `id` - *[optional]* id attribute
+* `style` - *[optional]* style attribute value (see [`svgStyle`](#svgStyle) )
+* `attr` - *[optional]* additional attributes
+* `title` - *[optional]* title
 
 ### svgRect
 
@@ -85,11 +85,11 @@ Encodes an array of XY ordinates as an SVG `polygon`.
 * `y` - Y location of bottom-left corner
 * `width` - rectangle width
 * `height` - rectangle height
-* `class` - *(optional)* class attribute
-* `id` - *(optional)* id attribute
-* `style` - *(optional)* style attribute value (see [`svgStyle`](#svgStyle) )
-* `attr` - *(optional)* additional attributes
-* `title` - *(optional)* title
+* `class` - *[optional]* class attribute
+* `id` - *[optional]* id attribute
+* `style` - *[optional]* style attribute value (see [`svgStyle`](#svgStyle) )
+* `attr` - *[optional]* additional attributes
+* `title` - *[optional]* title
 
 ### svgText
 
@@ -97,11 +97,11 @@ Encodes text starting at position `loc` as an SVG `text` element.
 
 * `loc` - Point geometry giving location of text
 * `content` - text value
-* `class` - *(optional)* class attribute
-* `id` - *(optional)* id attribute
-* `style` - *(optional)* style attribute value
-* `attr` - *(optional)* additional attributes
-* `title` - *(optional)* title
+* `class` - *[optional]* class attribute
+* `id` - *[optional]* id attribute
+* `style` - *[optional]* style attribute value
+* `attr` - *[optional]* additional attributes
+* `title` - *[optional]* title
 
 Relevant style CSS properties include:
 
