@@ -60,22 +60,22 @@ A CSS `fill` property value can refer to the gradient using the specifier `url(#
 Encodes a PostGIS geometry as an SVG shape.
 
 * `geom` - geometry to encode
-* `class` - (opt) class attribute
-* `id` - (opt) id attribute
-* `style` - (opt) style attribute value (see [`svgStyle`](#svgStyle) )
-* `attr` - (opt) additional attributes
-* `title` - (opt) title
+* `class` - *(optional)* class attribute
+* `id` - *(optional)* id attribute
+* `style` - *(optional)* style attribute value (see [`svgStyle`](#svgStyle) )
+* `attr` - *(optional)* additional attributes
+* `title` - *(optional)* title
 
 ### svgPolygon
 
 Encodes an array of XY ordinates as an SVG `polygon`.
 
 * `pts` - array of X Y ordinates
-* `class` - (opt) class attribute
-* `id` - (opt) id attribute
-* `style` - (opt) style attribute value (see [`svgStyle`](#svgStyle) )
-* `attr` - (opt) additional attributes
-* `title` - (opt) title
+* `class` - *(optional)* class attribute
+* `id` - *(optional)* id attribute
+* `style` - *(optional)* style attribute value (see [`svgStyle`](#svgStyle) )
+* `attr` - *(optional)* additional attributes
+* `title` - *(optional)* title
 
 ### svgRect
 
@@ -85,11 +85,11 @@ Encodes an array of XY ordinates as an SVG `polygon`.
 * `y` - Y location of bottom-left corner
 * `width` - rectangle width
 * `height` - rectangle height
-* `class` - (opt) class attribute
-* `id` - (opt) id attribute
-* `style` - (opt) style attribute value (see [`svgStyle`](#svgStyle) )
-* `attr` - (opt) additional attributes
-* `title` - (opt) title
+* `class` - *(optional)* class attribute
+* `id` - *(optional)* id attribute
+* `style` - *(optional)* style attribute value (see [`svgStyle`](#svgStyle) )
+* `attr` - *(optional)* additional attributes
+* `title` - *(optional)* title
 
 ### svgText
 
@@ -97,11 +97,11 @@ Encodes text starting at position `loc` as an SVG `text` element.
 
 * `loc` - Point geometry giving location of text
 * `content` - text value
-* `class` - (opt) class attribute
-* `id` - (opt) id attribute
-* `style` - (opt) style attribute value
-* `attr` - (opt) additional attributes
-* `title` - (opt) title
+* `class` - *(optional)* class attribute
+* `id` - *(optional)* id attribute
+* `style` - *(optional)* style attribute value
+* `attr` - *(optional)* additional attributes
+* `title` - *(optional)* title
 
 Relevant style CSS properties include:
 
