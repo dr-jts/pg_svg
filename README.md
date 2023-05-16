@@ -28,12 +28,12 @@ WHERE  proname LIKE 'svg%' AND pg_function_is_visible(oid);
 Creates an SVG doc element from an array of content elements.
 
 * `content` - an array of `text` values output as the content of the `<svg>` element
-* `viewbox` - (opt) value of SVG viewBox attribute ( `x y width height` )
+* `viewbox` - **OPT** value of SVG viewBox attribute ( `x y width height` )
   * see [`svgViewbox`](#svgViewbox)
-* `width` (opt) - width of view
-* `height` (opt) - height of view
-* `style` (opt) - specifies CSS styling at the document level  (see [`svgStyle`](#svgStyle) )
-* `def` (opt) - specifies a definition
+* `width` - **OPT** width of view
+* `height` - **OPT** height of view
+* `style` - **OPT** specifies CSS styling at the document level  (see [`svgStyle`](#svgStyle) )
+* `def` - **OPT** specifies a definition
   * see [`svgLinearGradient`](#svgLinearGradient)
 
 ### svgViewbox
