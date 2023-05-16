@@ -30,10 +30,10 @@ Creates an SVG doc element from an array of content elements.
 * `content` - an array of `text` values output as the content of the `<svg>` element
 * `viewbox` - *optional* value of SVG viewBox attribute ( `x y width height` )
   * see [`svgViewbox`](#svgViewbox)
-* `width` - **OPT** width of view
-* `height` - **OPT** height of view
-* `style` - **OPT** specifies CSS styling at the document level  (see [`svgStyle`](#svgStyle) )
-* `def` - **OPT** specifies a definition
+* `width` - *optional* width of view
+* `height` - *optional* height of view
+* `style` - *optional* specifies CSS styling at the document level  (see [`svgStyle`](#svgStyle) )
+* `def` - *optional* specifies a definition
   * see [`svgLinearGradient`](#svgLinearGradient)
 
 ### svgViewbox
