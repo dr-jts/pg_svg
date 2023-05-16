@@ -32,7 +32,8 @@ Creates an SVG doc element from an array of content elements.
   * see [`svgViewbox`](#svgViewbox)
 * `width` - *[optional]* width of view
 * `height` - *[optional]* height of view
-* `style` - *[optional]* specifies CSS styling at the document level  (see [`svgStyle`](#svgStyle) )
+* `style` - *[optional]* specifies CSS styling at the document level 
+  * see [`svgStyle`](#svgStyle)
 * `def` - *[optional]* specifies a definition
   * see [`svgLinearGradient`](#svgLinearGradient)
 
@@ -62,7 +63,8 @@ Encodes a PostGIS geometry as an SVG shape.
 * `geom` - geometry to encode
 * `class` - *[optional]* class attribute
 * `id` - *[optional]* id attribute
-* `style` - *[optional]* style attribute value (see [`svgStyle`](#svgStyle) )
+* `style` - *[optional]* style attribute value
+  * see [`svgStyle`](#svgStyle)
 * `attr` - *[optional]* additional attributes
 * `title` - *[optional]* title
 
@@ -73,7 +75,8 @@ Encodes an array of XY ordinates as an SVG `polygon`.
 * `pts` - array of X Y ordinates
 * `class` - *[optional]* class attribute
 * `id` - *[optional]* id attribute
-* `style` - *[optional]* style attribute value (see [`svgStyle`](#svgStyle) )
+* `style` - *[optional]* style attribute value 
+  * see [`svgStyle`](#svgStyle)
 * `attr` - *[optional]* additional attributes
 * `title` - *[optional]* title
 
@@ -87,7 +90,8 @@ Encodes an array of XY ordinates as an SVG `polygon`.
 * `height` - rectangle height
 * `class` - *[optional]* class attribute
 * `id` - *[optional]* id attribute
-* `style` - *[optional]* style attribute value (see [`svgStyle`](#svgStyle) )
+* `style` - *[optional]* style attribute value 
+  * see [`svgStyle`](#svgStyle)
 * `attr` - *[optional]* additional attributes
 * `title` - *[optional]* title
 
@@ -134,13 +138,21 @@ CSS color specifiers include:
 * `hsl(h,s,l)` - can use the `svgHSL` function to create this
 * `url(#id)` - reference to a gradient definition
 
+### svgRGB
+
+Encodes Red,Bliue,Green values as a CSS HSL function `rgb(R,G,B)`.
+
+* `red` - a value in 0..255
+* `green` - a value in 0..255
+* `blue` - a value in 0..255
+
 ### svgHSL
 
 Encodes Hue,Saturation,Lightness values as a CSS HSL function `hsl(H,S,L)`.
 
-* Hue is a value in degrees (from 0 through 360, with 0 = red, 120 = green, and 240 = blue)
-* Saturation is a percentage
-* Lightness is a percentage
+* `hue` - a hue value in degrees (from 0 through 360, with 0 = red, 120 = green, and 240 = blue)
+* `saturation` - *[optional]* a percentage, default 100
+* `lightness` - *[optional]* a percentage, default 50
 
 ### svgRandInt
 
