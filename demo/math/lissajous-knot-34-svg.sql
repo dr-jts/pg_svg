@@ -33,6 +33,7 @@ svg AS ( SELECT geom, svgShape( geom,
     FROM seg
 )
 SELECT svgDoc( array_agg( svg ),
+          width => 400,
           viewbox => svgViewbox( ST_Expand( ST_Extent(geom), 0.5 )),
           style => svgStyle('stroke-width', '0.12', 'stroke-linecap', 'round' )
     ) AS svg
