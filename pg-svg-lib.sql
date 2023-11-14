@@ -454,6 +454,22 @@ END;
 $$
 LANGUAGE 'plpgsql' IMMUTABLE STRICT;
 
+CREATE OR REPLACE FUNCTION svgRGBf(
+  red float8,
+  green float8,
+  blue float8
+)
+RETURNS text AS
+$$
+BEGIN
+  RETURN svgRGB( 
+    svgClamp(255 * red,   0, 255)::int,
+    svgClamp(255 * green, 0, 255)::int, 
+    svgClamp(255 * blue,  0, 255)::int);
+END;
+$$
+LANGUAGE 'plpgsql' IMMUTABLE STRICT;
+
 ----------------------------------------
 -- Function: svgRandInt
 -- Returns a random integer in a range
@@ -492,3 +508,27 @@ BEGIN
 END;
 $$
 LANGUAGE 'plpgsql' VOLATILE STRICT;
+
+----------------------------------------
+-- Function: svgHSL
+-- Encodes HSL function call
+-- Parameters:
+-- hue : value from 0 to 360
+-- saturation : percentage value in 0..100 (default 100)
+-- lightness : percentage value in 0..100 (default 50)
+----------------------------------------
+CREATE OR REPLACE FUNCTION svgClamp(
+  val float8,
+  min float8,
+  max float8
+)
+RETURNS float8 AS
+$$
+BEGIN
+  RETURN CASE WHEN val < min THEN min
+    WHEN val > max THEN max
+    ELSE val
+  END IF;
+END;
+$$
+LANGUAGE 'plpgsql' IMMUTABLE STRICT;
