@@ -265,6 +265,43 @@ $$
 LANGUAGE 'plpgsql' IMMUTABLE STRICT;
 
 ----------------------------------------
+-- Function: svgEllipse
+-- Parameters:
+--
+----------------------------------------
+CREATE OR REPLACE FUNCTION svgEllipse(
+  x float8,
+  y float8,
+  rx float8,
+  ry float8,
+  class text DEFAULT '',
+  id text DEFAULT '',
+  style text DEFAULT '',
+  attr text DEFAULT '',
+  title text DEFAULT ''
+)
+RETURNS text AS
+$$
+DECLARE
+  svg text;
+BEGIN
+  svg := '<ellipse '
+    || _svgAttr( class, id, style, attr)
+    || ' cx="' || x || '" cy="' || y
+    || '" rx="' || rx || '" ry="' || ry
+    || '" />';
+
+  IF title <> '' THEN
+    svg := '<g>' || svg;
+    svg := svg || '<title>' || title || '</title></g>';
+  END IF;
+
+  RETURN svg;
+END;
+$$
+LANGUAGE 'plpgsql' IMMUTABLE STRICT;
+
+----------------------------------------
 -- Function: svgText
 ----------------------------------------
 CREATE OR REPLACE FUNCTION svgText(
@@ -372,21 +409,23 @@ BEGIN
 
   style := '';
   IF stroke <> '' THEN
-    style := ' stroke: ' || stroke || ';';
+    style := ' stroke:' || stroke || ';';
   END IF;
   IF strokewidth <> '' THEN
-    style :=  style || ' stroke-width: ' || strokewidth || ';';
+    style :=  style || ' stroke-width:' || strokewidth || ';';
   END IF;
   IF fill <> '' THEN
-    style :=  style || ' fill: ' || fill || ';';
+    style :=  style || ' fill:' || fill || ';';
   END IF;
   IF fillopacity <> '' THEN
-    style :=  style || ' fill-opacity: ' || fillopacity || ';';
+    style :=  style || ' fill-opacity:' || fillopacity || ';';
   END IF;
 
-  FOR i IN 1..array_length( css, 1)/2 LOOP
-    style := style || ' ' || css[2*i-1] || ': ' || css[2*i] || ';';
-  END LOOP;
+  IF array_length(css, 1) > 0 THEN
+    FOR i IN 1..array_length( css, 1)/2 LOOP
+      style := style || ' ' || css[2*i-1] || ':' || css[2*i] || ';';
+    END LOOP;
+  END IF;
 
   RETURN style;
 END;
