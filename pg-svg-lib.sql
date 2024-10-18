@@ -365,38 +365,6 @@ $$
 LANGUAGE 'plpgsql' IMMUTABLE STRICT;
 
 ----------------------------------------
--- Function: svgGroup
-----------------------------------------
-CREATE OR REPLACE FUNCTION svgGroup(
-  content text[],
-  class text DEFAULT '',
-  id text DEFAULT '',
-  style text DEFAULT '',
-  attr text DEFAULT '',
-  title text DEFAULT ''
-)
-RETURNS text AS
-$$
-DECLARE
-  svg text;
-BEGIN
-  svg := '<g '
-    || _svgAttr( class, id, style, attr)
-    || E'> \n';
-
-  IF content IS NOT NULL THEN
-    FOR i IN 1..array_length( content, 1) LOOP
-      svg := svg || content[i] || E'\n';
-    END LOOP;
-  END IF;
-
-  svg := svg || '</g>' || E'\n';
-  RETURN svg;
-END;
-$$
-LANGUAGE 'plpgsql' IMMUTABLE STRICT;
-
-----------------------------------------
 -- Function: _svgAttr
 ----------------------------------------
 CREATE OR REPLACE FUNCTION _svgAttr(
@@ -615,12 +583,7 @@ $$
 LANGUAGE 'plpgsql' VOLATILE STRICT;
 
 ----------------------------------------
--- Function: svgHSL
--- Encodes HSL function call
--- Parameters:
--- hue : value from 0 to 360
--- saturation : percentage value in 0..100 (default 100)
--- lightness : percentage value in 0..100 (default 50)
+-- Function: svgClamp
 ----------------------------------------
 CREATE OR REPLACE FUNCTION svgClamp(
   val float8,

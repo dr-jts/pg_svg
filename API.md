@@ -1,10 +1,10 @@
 # API
 
-## Functions
+## Document Structure Functions
 
 ### svgDoc
 
-Creates an SVG `doc` document element from an array of content elements.
+Creates an SVG `svg` document element from an array of content elements.
 
 * `content` - an array of `text` values output as the content of the `<svg>` element
 * `viewbox` - *[optional]* value of SVG viewBox attribute ( `x y width height` )
@@ -35,6 +35,8 @@ Creates an SVG `g` group element from an array of content elements.
 * `style` - *[optional]* style attribute value
   * see [`svgStyle`](#svgStyle)
 * `attr` - *[optional]* additional attributes
+
+## Shape Functions
 
 ### svgShape
 
@@ -75,6 +77,21 @@ Encodes an array of XY ordinates as an SVG `polygon`.
 * `attr` - *[optional]* additional attributes
 * `title` - *[optional]* title
 
+### svgEllipse
+
+Creates an SVG `ellipse` with centre `x, y` and radii `rx` and `ry`
+
+* `x` - X location of bottom-left corner
+* `y` - Y location of bottom-left corner
+* `width` - rectangle width
+* `height` - rectangle height
+* `class` - *[optional]* class attribute
+* `id` - *[optional]* id attribute
+* `style` - *[optional]* style attribute value 
+  * see [`svgStyle`](#svgStyle)
+* `attr` - *[optional]* additional attributes
+* `title` - *[optional]* title
+
 ### svgText
 
 Encodes text starting at position `loc` as an SVG `text` element.
@@ -93,6 +110,8 @@ Relevant style CSS properties include:
 * `font` - full font specifier.  E.g. `10px Verdana,Helvetica,Arial,sans-serif`
 * `font-style` - value of `normal | italic | oblique`
 * `font-weight` - value of `normal | bold | bolder | lighter | <number>`
+
+## Styling Functions
 
 ### svgStyle
 
@@ -144,10 +163,16 @@ A CSS `fill` property value can refer to the gradient using the specifier `url(#
 * `color1` - the start color of the gradient
 * `color2` - the end color of the gradient
 
+## Utility Functions
+
 ### svgRandInt
 
 Returns a random integer from the range [lo, hi] (inclusive)
 
 ### svgRandPick
+
+Returns a random item from an array of integers
+
+### svgClamp
 
 Returns a random item from an array of integers
