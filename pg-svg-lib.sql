@@ -55,9 +55,11 @@ BEGIN
     svg := svg || '</defs>' || E'\n';
   END IF;
 
-  FOR i IN 1..array_length( content, 1) LOOP
-    svg := svg || content[i] || E'\n';
-  END LOOP;
+  IF content IS NOT NULL THEN
+    FOR i IN 1..array_length( content, 1) LOOP
+      svg := svg || content[i] || E'\n';
+    END LOOP;
+  END IF;
 
   svg := svg || '</svg>';
   RETURN svg;
@@ -86,6 +88,38 @@ BEGIN
   h = ST_YMax(extent) - ST_YMin(extent);
   vbData := ST_XMin(extent) || ' ' || -ST_YMax(extent) || ' ' || w || ' ' || h;
   RETURN vbData;
+END;
+$$
+LANGUAGE 'plpgsql' IMMUTABLE STRICT;
+
+----------------------------------------
+-- Function: svgGroup
+----------------------------------------
+CREATE OR REPLACE FUNCTION svgGroup(
+  content text[],
+  class text DEFAULT '',
+  id text DEFAULT '',
+  style text DEFAULT '',
+  attr text DEFAULT '',
+  title text DEFAULT ''
+)
+RETURNS text AS
+$$
+DECLARE
+  svg text;
+BEGIN
+  svg := '<g '
+    || _svgAttr( class, id, style, attr)
+    || E'> \n';
+
+  IF content IS NOT NULL THEN
+    FOR i IN 1..array_length( content, 1) LOOP
+      svg := svg || content[i] || E'\n';
+    END LOOP;
+  END IF;
+
+  svg := svg || '</g>' || E'\n';
+  RETURN svg;
 END;
 $$
 LANGUAGE 'plpgsql' IMMUTABLE STRICT;
@@ -326,6 +360,38 @@ BEGIN
     || ' x="' || x || '" y="' || y || '" '
     || _svgAttr( class, id, style, attr)
     || '>' || content || '</text>';
+END;
+$$
+LANGUAGE 'plpgsql' IMMUTABLE STRICT;
+
+----------------------------------------
+-- Function: svgGroup
+----------------------------------------
+CREATE OR REPLACE FUNCTION svgGroup(
+  content text[],
+  class text DEFAULT '',
+  id text DEFAULT '',
+  style text DEFAULT '',
+  attr text DEFAULT '',
+  title text DEFAULT ''
+)
+RETURNS text AS
+$$
+DECLARE
+  svg text;
+BEGIN
+  svg := '<g '
+    || _svgAttr( class, id, style, attr)
+    || E'> \n';
+
+  IF content IS NOT NULL THEN
+    FOR i IN 1..array_length( content, 1) LOOP
+      svg := svg || content[i] || E'\n';
+    END LOOP;
+  END IF;
+
+  svg := svg || '</g>' || E'\n';
+  RETURN svg;
 END;
 $$
 LANGUAGE 'plpgsql' IMMUTABLE STRICT;
