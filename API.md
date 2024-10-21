@@ -49,6 +49,7 @@ Encodes a PostGIS geometry as an SVG shape.
   * see [`svgStyle`](#svgStyle)
 * `attr` - *[optional]* additional attributes
 * `title` - *[optional]* title
+* `radius` - *[optional]* radius of point circle
 
 ### svgPolygon
 
