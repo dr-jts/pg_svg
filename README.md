@@ -3,7 +3,7 @@
 A collection of [PostgreSQL](https://www.postgresql.org/) functions
 which allow easily creating [SVG](https://developer.mozilla.org/en-US/docs/Web/SVG) graphics.
 The main goal of the API is to allow converting [PostGIS](https://postgis.net/) geometries into styled SVG documents.
-The functions also support simple geometry generated without PostGIS.
+The API also supports simple geometry generated without PostGIS.
 
 ## Installation
 
@@ -54,7 +54,7 @@ SELECT svgDoc( array_agg( svg ),
     viewbox => svgViewbox( ST_Expand( ST_Extent(geom), 2))
   ) AS svg FROM shape;
 ```
-Generate an SVG for this example using:
+Generate an SVG file for this example using:
 ```
 psql -A -t -o wa.svg  < wa.sql
 ```
