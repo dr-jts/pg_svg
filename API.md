@@ -178,14 +178,14 @@ A CSS `fill` property value can refer to the gradient using the specifier `url(#
 
 ## Utility Functions
 
-### svgRandInt
+### svgRandInt( lo, hi )
 
 Returns a random integer from the range [lo, hi] (inclusive)
 
-### svgRandPick
+### svgRandPick( int[] )
 
 Returns a random item from an array of integers
 
-### svgClamp
+### svgClamp( val, min, max )
 
 Returns a random item from an array of integers
