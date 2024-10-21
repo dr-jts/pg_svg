@@ -129,7 +129,7 @@ For full list see [W3C SVG spec](https://www.w3.org/TR/SVG/propidx.html).
 * `stroke-dasharray` - dashed line specifier, e.g. `2,4,1,4`
 * `stroke-dashoffset` - offset of dashes
 * `stroke-width` - line width
-* `fill-opacity` - opacity of stroke; value in [ 0,1 ]
+* `font` - font specifier in the form `style variant weight size family`
 
 CSS color specifiers include:
 
@@ -137,6 +137,18 @@ CSS color specifiers include:
 * `colorname`
 * `hsl(h,s,l)` - can use the `svgHSL` function to create this
 * `url(#id)` - reference to a gradient definition
+
+### svgStyleProp
+
+Generates an SVG CSS `style` value from the following parameters:
+
+* `fill` - fill color
+* `fillopacity` - opacity of fill; value in [ 0,1 ]
+* `stroke` - line color
+* `strokewidth` - line width
+* `fill-opacity` - opacity of stroke; value in [ 0,1 ]
+* `font` - font specifier in the form `style variant weight size family`
+* `css` - array of name,value pairs specifying additional CSS properties
 
 ### svgRGB
 
