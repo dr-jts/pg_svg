@@ -12,7 +12,7 @@ Creates an SVG `svg` document element from an array of content elements.
 * `width` - *[optional]* width of view
 * `height` - *[optional]* height of view
 * `style` - *[optional]* specifies CSS styling at the document level 
-  * see [`svgStyle`](#svgStyle)
+  * see [`svgStyle`](#svgStyle), [`svgStyleProp`](#svgStyleProp)
 * `def` - *[optional]* specifies a definition
   * see [`svgLinearGradient`](#svgLinearGradient)
 
