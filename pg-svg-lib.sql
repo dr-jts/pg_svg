@@ -433,6 +433,7 @@ CREATE OR REPLACE FUNCTION svgStyleProp(
   strokewidth text DEFAULT '',
   fill text DEFAULT '',
   fillopacity text DEFAULT '',
+  font text DEFAULT '',
   css text[] DEFAULT ARRAY[]::text[]
 )
 RETURNS text AS
@@ -454,6 +455,9 @@ BEGIN
   IF fillopacity <> '' THEN
     style :=  style || ' fill-opacity:' || fillopacity || ';';
   END IF;
+  IF font <> '' THEN
+    style :=  style || ' font:' || font || ';';
+  END IF;
 
   IF array_length(css, 1) > 0 THEN
     FOR i IN 1..array_length( css, 1)/2 LOOP
@@ -464,7 +468,7 @@ BEGIN
   RETURN style;
 END;
 $$
-LANGUAGE 'plpgsql' IMMUTABLE STRICT;
+LANGUAGE 'plpgsql' IMMUTABLE;
 
 ----------------------------------------
 -- Function: svgLinearGradient
