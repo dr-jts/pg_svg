@@ -52,4 +52,4 @@ SELECT svgDoc( array_agg( svg ),
     viewbox => svgViewbox( ST_Expand( ST_Extent(geom), 2))
   ) AS svg FROM shape;
 ```
-![](demo/map/us-city-distance.svg)
+![](demo/map/wa.svg)
