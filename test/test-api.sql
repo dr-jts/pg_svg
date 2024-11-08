@@ -7,7 +7,8 @@
 
 WITH shapes(svg) AS (VALUES
    ( svgRect(0, 50, 20, 40,
-      style => svgStyleProp(stroke => svgRGB(200, 0, 100),
+        rx => 5, ry => 2,
+        style => svgStyleProp(stroke => svgRGB(200, 0, 100),
                             strokewidth => '10',
                             fill => svgHSL(125, 80, 40),
                             fillopacity => '0.5'

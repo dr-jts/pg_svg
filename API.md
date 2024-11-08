@@ -71,6 +71,8 @@ Encodes an array of XY ordinates as an SVG `polygon`.
 * `y` - Y location of bottom-left corner
 * `width` - rectangle width
 * `height` - rectangle height
+* `rx` - *[optional]* corner radius X dimension
+* `ry` - *[optional]* corner radius Y dimension
 * `class` - *[optional]* class attribute
 * `id` - *[optional]* id attribute
 * `style` - *[optional]* style attribute value 

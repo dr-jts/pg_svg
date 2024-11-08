@@ -271,6 +271,8 @@ CREATE OR REPLACE FUNCTION svgRect(
   y float8,
   width float8,
   height float8,
+  rx float8 DEFAULT 0.0,
+  ry float8 DEFAULT 0.0,
   class text DEFAULT '',
   id text DEFAULT '',
   style text DEFAULT '',
@@ -284,8 +286,10 @@ DECLARE
 BEGIN
   svg := '<rect '
     || _svgAttr( class, id, style, attr)
-    || ' x="' || x || '" y="' || y
-    || '" width="' || width || '" height="' || height
+    || ' x="' || x || '" y="' || y || '"'
+    || CASE WHEN rx = 0.0 THEN '' ELSE ' rx="' || rx || '"' END
+    || CASE WHEN ry = 0.0 THEN '' ELSE ' ry="' || rx || '"' END
+    || ' width="' || width || '" height="' || height
     || '" />';
 
   IF title <> '' THEN
