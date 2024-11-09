@@ -14,9 +14,16 @@ WITH shapes(svg) AS (VALUES
                             fillopacity => '0.5'
                         )
    ) )
-  ,( svgEllipse(50, 100, 20, 40, 
+    ,( svgEllipse(50, 70, 20, 40, 
         style => svgStyle('stroke', '#0000ff', 'fill', '#00ffff') 
     ) )
+    ,( svgPolygon(ARRAY[100, 50, 120, 60, 130, 55, 140, 60, 130, 80, 100, 50],
+        style => svgStyle('stroke', '#ff0000', 'fill', '#ffff00') 
+    ))
+    ,( svgText('POINT ( 20 -20 )'::geometry, 'This is a test',
+        style => svgStyle('stroke', '#ff0000', 'fill', '#ffff00') 
+    ))
+
 )
 SELECT svgDoc( array_agg( svg ),
     viewbox => '0 0 400 400'
