@@ -25,8 +25,6 @@ DECLARE
   widthAttr text;
   heightAttr text;
   svg text;
-  xSize real;
-  ySize real;
 BEGIN
   viewBoxAttr := ' viewBox="' || viewbox || '" ';
 
