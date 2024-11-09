@@ -21,7 +21,7 @@ WITH shapes(svg) AS (VALUES
         style => svgStyle('stroke', '#ff0000', 'fill', '#ffff00') 
     ))
     ,( svgText('POINT ( 20 -20 )'::geometry, 'This is a test',
-        style => svgStyle('stroke', '#ff0000', 'fill', '#ffff00') 
+        style => svgStyle('stroke', '#004444', 'fill', '#ffff00', 'text-anchor', 'middle', 'font', '20px sans-serif') 
     ))
 
 )
