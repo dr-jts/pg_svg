@@ -288,7 +288,7 @@ BEGIN
     || _svgAttr( class, id, style, attr)
     || ' x="' || x || '" y="' || y || '"'
     || CASE WHEN rx = 0.0 THEN '' ELSE ' rx="' || rx || '"' END
-    || CASE WHEN ry = 0.0 THEN '' ELSE ' ry="' || rx || '"' END
+    || CASE WHEN ry = 0.0 THEN '' ELSE ' ry="' || ry || '"' END
     || ' width="' || width || '" height="' || height
     || '" />';
 
