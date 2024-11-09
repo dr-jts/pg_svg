@@ -1,5 +1,5 @@
 --======================================
--- PostGIS SVg functions
+-- PostGIS SVG functions
 -- Martin Davis  2019
 
 -- INSTALLATION
