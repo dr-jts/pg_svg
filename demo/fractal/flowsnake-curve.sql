@@ -51,11 +51,11 @@ seg AS (
   FROM pts WHERE xp <> x OR yp <> y
 ),
 svg AS ( SELECT geom, svgShape( geom,
-        style => svgStyle('stroke', svgHSL( 100*(id/ 1024.0 ), 80, 50))
+        style => svgStyle('stroke', svgHSL( 200 + 110*(id % 401/ 401.0 ), 80, 50))
       ) AS svg
     FROM seg
 )
 SELECT svgDoc( array_agg( svg ),
           viewbox => svgViewbox( ST_Expand( ST_Extent(geom), 5 )),
-          style => svgStyle('stroke-width', '0.3', 'stroke-linecap', 'round' ) )
+          style => svgStyle('stroke-width', '0.7', 'stroke-linecap', 'round' ) )
   FROM svg;
