@@ -154,11 +154,19 @@ Generates an SVG CSS `style` value from the following parameters:
 
 ### svgRGB
 
-Encodes Red,Bliue,Green values as a CSS HSL function `rgb(R,G,B)`.
+Encodes Red,Blue,Green values as a CSS HSL function `rgb(R,G,B)`.
 
 * `red` - a value in 0..255
 * `green` - a value in 0..255
 * `blue` - a value in 0..255
+
+### svgRGBf
+
+Encodes Red,Blue,Green values as a CSS HSL function `rgb(R,G,B)`.
+
+* `red` - a value in 0..1
+* `green` - a value in 0..1
+* `blue` - a value in 0..1
 
 ### svgHSL
 
